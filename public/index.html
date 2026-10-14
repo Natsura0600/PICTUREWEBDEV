@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pedí tu propuesta · Estudio Norte</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+.pf{--bg:#f5f5f2;--sf:#fff;--tx:#14161a;--mt:#656a73;--ac:#2b4cff;--bd:#dcdcd5;--ok:#1f8a58;--er:#c8433a;--se:'Bricolage Grotesque',system-ui,sans-serif;--sa:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--tx);font:400 15px/1.55 var(--sa);min-height:100vh}
+.pf *{box-sizing:border-box}
+.pf h1,.pf h2,.pf h3{font-family:var(--se);font-weight:700;margin:0;line-height:1.1;letter-spacing:-.01em}
+.pf input,.pf select,.pf textarea{width:100%;background:var(--sf);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;font:inherit}
+.pf textarea{resize:vertical}
+.pf input:focus,.pf select:focus,.pf textarea:focus,.pf button:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+.pf label{display:grid;gap:5px;font-size:.82rem;font-weight:500;color:var(--mt)}
+.pf .bt{display:inline-block;background:var(--tx);color:#fff;border:0;border-radius:8px;padding:11px 18px;font:600 .9rem var(--sa);cursor:pointer;text-decoration:none;text-align:center}
+.pf .bt:hover{background:var(--ac)}.pf .bt.o{background:transparent;color:var(--tx);border:1px solid var(--bd)}.pf .bt.o:hover{border-color:var(--tx)}.pf .bt.d{color:var(--er)}.pf .bt.s{padding:7px 12px;font-size:.8rem}.pf .bt:disabled{opacity:.5;cursor:default}
+.pf .hid{display:none!important}
+
+.pf .fh{padding:20px 6%;font:700 1.25rem var(--se);border-bottom:1px solid var(--bd)}
+.pf .fw{display:grid;grid-template-columns:1fr 1.15fr;gap:60px;max-width:1100px;margin:0 auto;padding:60px 6% 80px;align-items:start}
+.pf .fl{position:sticky;top:30px}.pf h1{font-size:clamp(2.2rem,5vw,3.6rem);margin-bottom:16px}
+.pf .lead{color:var(--mt);font-size:1.05rem;max-width:460px;margin:0 0 28px}
+.pf h3{font-size:1.1rem;margin-bottom:6px}.pf ol{padding-left:20px;margin:0;color:var(--mt)}.pf ol li{margin:10px 0}.pf ol b{color:var(--tx)}
+.pf .fc{background:var(--sf);border:1px solid var(--bd);border-radius:14px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pf .fc .full{grid-column:1/-1}.pf #fErr{color:var(--er);font-size:.9rem;min-height:1.3em}.pf #fOk{display:block}.pf #fOk h2{font-size:1.8rem;margin-bottom:10px}.pf #fOk p{color:var(--mt);margin:0}
+@media(max-width:820px){.pf .fw{grid-template-columns:1fr;gap:30px;padding-top:30px}.pf .fl{position:static}.pf .fc{grid-template-columns:1fr}}
+</style></head>
+<body class="pf">
+<header class="fh">Estudio Norte</header>
+<main class="fw">
+<section class="fl"><h1>Contanos qué proyecto tenés en mente</h1><p class="lead">Completá el formulario con todo lo que puedas. Cuanto más claro sea tu pedido, más precisa va a ser nuestra propuesta.</p>
+<h3>Qué pasa después</h3><ol><li><b>Leemos tu pedido.</b> Lo revisamos nosotros, sin intermediarios.</li><li><b>Te respondemos en 24 horas</b> con preguntas o un primer presupuesto.</li><li><b>Si avanzamos,</b> coordinamos una reunión y arrancamos con una seña.</li></ol></section>
+<div>
+<form id="fForm" class="fc" novalidate>
+<label>Nombre y apellido<input name="nombre" required maxlength="100" autocomplete="name"></label>
+<label>Email<input name="email" type="email" required maxlength="150" autocomplete="email"></label>
+<label>WhatsApp (opcional)<input name="whatsapp" maxlength="30" autocomplete="tel" placeholder="+54 9 11 ..."></label>
+<label>Tipo de proyecto<select name="tipo" required><option value="">Elegí una opción</option><option>Sitio institucional</option><option>Tienda online</option><option>Landing page</option><option>Sistema a medida</option><option>Rediseño de un sitio existente</option><option>Otro</option></select></label>
+<label>Presupuesto aproximado<select name="presupuesto"><option>Todavía no lo sé</option><option>Hasta USD 500</option><option>USD 500 a 1.500</option><option>USD 1.500 a 3.000</option><option>Más de USD 3.000</option></select></label>
+<label>¿Para cuándo lo necesitás?<select name="plazo"><option>Lo antes posible</option><option>En 1 mes</option><option>En 2 o 3 meses</option><option>Sin apuro</option></select></label>
+<label class="full">¿Qué necesitás?<textarea name="descripcion" rows="5" required minlength="20" maxlength="3000" placeholder="Qué vendés o hacés, qué querés que pueda hacer el sitio, qué secciones imaginás..."></textarea></label>
+<label class="full">Sitios de referencia (opcional)<textarea name="referencias" rows="2" maxlength="600" placeholder="Links a sitios que te gustan o a tu sitio actual"></textarea></label>
+<input name="web" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px">
+<div class="full"><button class="bt" type="submit">Enviar propuesta</button><div id="fErr" role="alert"></div></div>
+</form>
+<div id="fOk" class="fc hid"><div class="full"><h2>Recibimos tu propuesta</h2><p>Te vamos a escribir a <b></b> en las próximas 24 horas.</p></div></div>
+</div></main>
+<script>
+(()=>{const t0=Date.now(),f=document.getElementById('fForm'),err=document.getElementById('fErr');
+f.addEventListener('submit',async e=>{e.preventDefault();err.textContent='';if(!f.reportValidity())return;
+const d=Object.fromEntries(new FormData(f));d.t=Date.now()-t0;const b=f.querySelector('button');b.disabled=true;b.textContent='Enviando…';
+try{const r=await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});const j=await r.json().catch(()=>({}));
+if(!r.ok)throw new Error(j.error||'No pudimos enviar tu propuesta. Probá de nuevo en un rato.');
+const ok=document.getElementById('fOk');ok.querySelector('b').textContent=d.email;f.classList.add('hid');ok.classList.remove('hid');window.scrollTo(0,0)}
+catch(x){err.textContent=x.message;b.disabled=false;b.textContent='Enviar propuesta'}})})();
+</script></body></html>
