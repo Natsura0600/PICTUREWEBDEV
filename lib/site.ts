@@ -15,8 +15,8 @@ export const site = {
   region: 'Buenos Aires',
   country: 'AR',
   whatsapp: {
-    display: '+54 9 3484 69-9281',
-    number: '5493484699281',
+    display: '+54 9 11 5249-5689',
+    number: '5491152495689',
   },
   /** Cargá acá tus redes cuando quieras mostrarlas (footer, contacto y JSON-LD). */
   socials: [] as ReadonlyArray<{ label: string; href: string }>,
