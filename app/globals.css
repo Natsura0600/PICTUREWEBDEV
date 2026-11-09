@@ -1,0 +1,194 @@
+@import 'tailwindcss';
+
+/* Modo oscuro por clase (lo maneja next-themes en <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Tokens de marca Picture Web Dev (Manual de marca).
+ * Negro y hueso, sin color de acento: el contraste sale de invertir.
+ * El verde solo se usa para WhatsApp y confirmaciones.
+ */
+:root {
+  --bg: #ffffff;
+  --surface: #f4f2ee;
+  --line: #dcd9d2;
+  --fg: #0a0a0a;
+  --muted: #5e5b55;
+  --ok: #1d6b45;
+  --danger: #a3271b;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0a0a0a;
+  --surface: #151515;
+  --line: #2b2b29;
+  --fg: #e7e3dd;
+  --muted: #9b978f;
+  --ok: #5fd69a;
+  --danger: #ff8a7a;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-ok: var(--ok);
+  --color-danger: var(--danger);
+  --color-negro: #0a0a0a;
+  --color-hueso: #e7e3dd;
+
+  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --text-display: clamp(2.6rem, 7.2vw, 6.25rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.045em;
+  --text-h2: clamp(2rem, 4.6vw, 3.6rem);
+  --text-h2--line-height: 1.02;
+  --text-h2--letter-spacing: -0.04em;
+
+  --radius-marca: 1.5rem;
+  --container-content: 77.5rem;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem;
+  }
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  ::selection {
+    background: var(--fg);
+    color: var(--bg);
+  }
+  :focus-visible {
+    outline: 2px solid var(--fg);
+    outline-offset: 3px;
+  }
+}
+
+/* La esquina de marca: arriba a la izquierda y abajo a la derecha, como el marco del logo */
+@utility rounded-marca {
+  border-radius: var(--radius-marca) 0 var(--radius-marca) 0;
+}
+
+/* Etiqueta de marca: mayúsculas en negrita, apiladas en dos líneas */
+@utility label-marca {
+  font-weight: 700;
+  font-size: 0.8125rem;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+@utility kicker {
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@utility wrap {
+  width: 100%;
+  max-width: calc(var(--container-content) + 2 * clamp(1rem, 5vw, 4.5rem));
+  margin-inline: auto;
+  padding-left: max(clamp(1rem, 5vw, 4.5rem), env(safe-area-inset-left));
+  padding-right: max(clamp(1rem, 5vw, 4.5rem), env(safe-area-inset-right));
+}
+
+/* Prosa de los casos de estudio (MDX) */
+@utility prose-caso {
+  max-width: 68ch;
+  & h2 {
+    font-weight: 800;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+    margin: 3rem 0 1rem;
+  }
+  & p {
+    color: var(--muted);
+    margin: 0 0 1.1rem;
+    font-size: 1.0625rem;
+  }
+  & strong {
+    color: var(--fg);
+  }
+  & ul {
+    margin: 0 0 1.25rem;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+  }
+  & li {
+    position: relative;
+    padding-left: 1.4rem;
+    color: var(--muted);
+  }
+  & li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.78em;
+    width: 0.7rem;
+    height: 2px;
+    background: currentColor;
+  }
+  & a {
+    color: var(--fg);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--line);
+  }
+}
+
+/* Aparición al hacer scroll (componente Reveal). Solo donde el navegador lo soporta y sin "reducir movimiento". */
+@keyframes reveal {
+  /* Solo movimiento, sin desvanecer: el texto mantiene su contraste en todo momento */
+  from {
+    translate: 0 1.5rem;
+    scale: 0.985;
+  }
+  to {
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--reveal-delay, 0%)) entry calc(45% + var(--reveal-delay, 0%));
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
