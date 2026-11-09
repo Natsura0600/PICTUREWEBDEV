@@ -358,6 +358,56 @@
   }
 }
 
+/* ================= Transiciones entre páginas (View Transitions) ================= */
+
+/* El header, el footer y el botón de WhatsApp quedan quietos: solo se mueve el contenido */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+    transform: translateY(-28px);
+  }
+}
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+}
+/* La página que se va sube y se desvanece; la nueva entra desde abajo, apenas después */
+::view-transition-old(.page-exit) {
+  animation: page-out 220ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(.page-enter) {
+  animation: page-in 520ms cubic-bezier(0.2, 0.7, 0.2, 1) 120ms both;
+}
+
+/* La captura del proyecto viaja de la tarjeta a la portada del caso (y vuelve) */
+::view-transition-group(.morph) {
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: via-blur;
+}
+@keyframes via-blur {
+  35% {
+    filter: blur(2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 /* Aparición al hacer scroll (componente Reveal). Solo donde el navegador lo soporta y sin "reducir movimiento". */
 @keyframes reveal {
   /* Solo movimiento, sin desvanecer: el texto mantiene su contraste en todo momento */

@@ -111,6 +111,7 @@ export default async function ProjectPage({ params }: Params) {
               title={meta.title}
               host={hostOf(meta.url)}
               url={meta.url}
+              transitionName={`shot-${slug}`}
               image={coverOf(project)}
               sizes="(min-width: 1280px) 1240px, 100vw"
               priority

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { ViewTransition } from 'react';
 import type { ProjectImage } from '@/lib/projects';
 import { cn } from '@/lib/utils';
 
@@ -10,6 +11,8 @@ type Props = {
   sizes: string;
   priority?: boolean;
   className?: string;
+  /** Nombre compartido entre la tarjeta y el caso: la captura "viaja" de una página a la otra. */
+  transitionName?: string;
 };
 
 /** Captura alta de la web en vivo (thum.io). next/image la optimiza y la sirve desde el propio dominio. */
@@ -22,8 +25,8 @@ export const livePreview = (url: string): string =>
  * - Al pasar el mouse, la imagen se desplaza hacia abajo como si se scrolleara la página.
  * - Al entrar en pantalla se descubre con una cortina (CSS, sin JavaScript).
  */
-export function ProjectShot({ title, host, url, image, sizes, priority, className }: Props) {
-  return (
+export function ProjectShot({ title, host, url, image, sizes, priority, className, transitionName }: Props) {
+  const shot = (
     <div className={cn('unveil rounded-marca border-line bg-surface overflow-hidden border', className)}>
       <div className="border-line flex items-center gap-2 border-b px-4 py-2.5" aria-hidden="true">
         <span className="size-2 rounded-full bg-[#ff5f57]" />
@@ -55,6 +58,12 @@ export function ProjectShot({ title, host, url, image, sizes, priority, classNam
         )}
       </div>
     </div>
+  );
+  if (!transitionName) return shot;
+  return (
+    <ViewTransition name={transitionName} share="morph" default="none">
+      {shot}
+    </ViewTransition>
   );
 }
 

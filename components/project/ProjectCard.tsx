@@ -21,6 +21,7 @@ export function ProjectCard({ project, index, priority, headingLevel: H = 'h3' }
           title={meta.title}
           host={hostOf(meta.url)}
           url={meta.url}
+          transitionName={`shot-${slug}`}
           image={coverOf(project)}
           sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw"
           priority={priority}
