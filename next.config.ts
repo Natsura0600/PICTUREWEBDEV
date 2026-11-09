@@ -39,6 +39,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   images: {
+    // Vistas previas en vivo de los proyectos (se optimizan y se sirven desde este dominio)
+    remotePatterns: [{ protocol: 'https', hostname: 'image.thum.io' }],
+    minimumCacheTTL: 60 * 60 * 24 * 7,
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [360, 640, 768, 1024, 1280, 1600, 1920, 2560],
     imageSizes: [96, 160, 256, 384],

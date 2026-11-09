@@ -10,7 +10,7 @@ export default function NotFound() {
       <div>
         <p className="kicker">Error 404</p>
         <h1 className="text-display mt-4 font-extrabold">
-          Esta página <span className="text-muted">no existe.</span>
+          Esta página <span className="hl">no existe.</span>
         </h1>
         <p className="text-muted mt-6 max-w-[48ch] md:text-lg">
           Puede que el link esté mal escrito o que la hayamos movido. Desde acá podés seguir:

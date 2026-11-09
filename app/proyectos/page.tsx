@@ -21,7 +21,7 @@ export default async function ProjectsPage() {
           kicker="Proyectos"
           title={
             <>
-              Ideas que ya son <span className="text-muted">herramientas.</span>
+              Ideas que ya son <span className="hl">herramientas.</span>
             </>
           }
           lead="Cada proyecto empezó con un problema concreto de un negocio. Entrá a cada caso para ver cómo lo resolvimos."

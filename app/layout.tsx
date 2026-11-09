@@ -72,6 +72,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Saltar al contenido
         </a>
+        <div
+          aria-hidden="true"
+          className="scroll-progress bg-accent pointer-events-none fixed inset-x-0 top-0 z-50 h-[3px] origin-left"
+        />
         <Providers>
           <Header />
           <main id="contenido" tabIndex={-1} className="outline-none">

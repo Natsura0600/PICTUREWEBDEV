@@ -23,7 +23,7 @@ export default function ServicesPage() {
           kicker="Servicios"
           title={
             <>
-              Todo lo que tu negocio necesita <span className="text-muted">para vender online.</span>
+              Todo lo que tu negocio necesita <span className="hl">para vender online.</span>
             </>
           }
           lead="Desde una landing clara hasta un sistema de turnos con panel propio. Te decimos qué te conviene según tu negocio, aunque sea lo más simple."

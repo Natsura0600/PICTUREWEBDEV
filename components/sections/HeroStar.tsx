@@ -48,9 +48,9 @@ function Star3D() {
       className="relative aspect-square w-full"
       style={reduce ? undefined : { scale, opacity }}
     >
-      <Frame className="text-line absolute inset-0 size-full" strokeWidth={2} />
+      <Frame className="text-accent absolute inset-0 size-full opacity-70" strokeWidth={2} />
       <m.div className="absolute inset-[13%]" style={reduce ? undefined : { rotate, rotateX: tilt }}>
-        <Star className="size-full" />
+        <Star className="spin-slow size-full" />
       </m.div>
     </m.div>
   );

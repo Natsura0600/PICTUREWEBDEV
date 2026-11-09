@@ -3,13 +3,15 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import type { ComponentProps } from 'react';
 import { cn } from '@/lib/utils';
 
-/** Botón de shadcn/ui, re-tematizado con los tokens de marca (inversión negro/hueso, sin acento). */
+/** Botón de shadcn/ui, re-tematizado con los tokens de marca. El principal usa el acento amarillo. */
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl font-bold tracking-[-0.01em] transition-[background-color,color,border-color,transform] duration-200 ease-out-soft focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-fg disabled:pointer-events-none disabled:opacity-60 [&_svg]:size-4 [&_svg]:shrink-0',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-xl font-bold tracking-[-0.01em] transition-[background-color,color,border-color,transform,box-shadow] duration-200 ease-out-soft focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent-ink disabled:pointer-events-none disabled:opacity-60 [&_svg]:size-4 [&_svg]:shrink-0',
   {
     variants: {
       variant: {
-        primary: 'bg-fg text-bg border border-fg hover:-translate-y-0.5 hover:opacity-90',
+        primary:
+          'btn-shine bg-accent text-on-accent border border-accent hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-10px_var(--accent)]',
+        inverse: 'bg-fg text-bg border border-fg hover:-translate-y-0.5 hover:opacity-90',
         outline: 'border border-line text-fg hover:border-fg',
         ghost: 'text-muted hover:text-fg',
         whatsapp: 'border border-ok/40 text-ok hover:border-ok',

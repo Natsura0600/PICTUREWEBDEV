@@ -8,7 +8,7 @@ export function Process({ kicker = '04 · Cómo trabajamos' }: { kicker?: string
         <Reveal>
           <p className="kicker">{kicker}</p>
           <h2 id="proceso-title" className="text-h2 mt-4 font-extrabold">
-            Menos vueltas. <span className="text-muted">Mejores herramientas.</span>
+            Menos vueltas. <span className="hl">Mejores herramientas.</span>
           </h2>
         </Reveal>
         <ol className="border-line border-t">
@@ -18,7 +18,9 @@ export function Process({ kicker = '04 · Cómo trabajamos' }: { kicker?: string
               key={s.title}
               className="border-line grid grid-cols-[2.75rem_minmax(0,1fr)] gap-3 border-b py-6"
             >
-              <span className="label-marca text-muted pt-1">{String(i + 1).padStart(2, '0')}</span>
+              <span className="label-marca light-up text-muted pt-1 !text-[1rem]">
+                {String(i + 1).padStart(2, '0')}
+              </span>
               <div>
                 <h3 className="text-lg font-bold tracking-[-0.02em] md:text-xl">{s.title}</h3>
                 <p className="text-muted mt-1.5 max-w-[60ch] text-[0.9375rem]">{s.text}</p>

@@ -18,7 +18,7 @@ export function Services({
             kicker={kicker}
             title={
               <>
-                La tecnología tiene que trabajar <span className="text-muted">para vos.</span>
+                La tecnología tiene que trabajar <span className="hl">para vos.</span>
               </>
             }
             lead="Elegimos la solución según el problema, no al revés. Cada proyecto se piensa para ser claro, útil y fácil de mantener."

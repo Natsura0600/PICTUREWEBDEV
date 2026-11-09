@@ -15,7 +15,7 @@ export function FeaturedProjects({ projects }: { projects: Project[] }) {
           kicker="01 · Proyectos"
           title={
             <>
-              Trabajo real, <span className="text-muted">en producción.</span>
+              Trabajo real, <span className="hl">en producción.</span>
             </>
           }
           lead="Sistemas y sitios que hoy usan negocios de verdad. Cada caso cuenta qué problema había y cómo lo resolvimos."

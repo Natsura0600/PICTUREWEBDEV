@@ -11,12 +11,12 @@ function Price({ value, suffix }: { value: string; suffix?: string }) {
   const amount = from ? value.slice(6) : value;
   return (
     <>
-      <span className={cn('block text-xs font-bold tracking-normal opacity-60', !from && 'invisible')}>
+      <span className={cn('block text-xs font-bold tracking-normal opacity-75', !from && 'invisible')}>
         desde
       </span>
       <span className="whitespace-nowrap">
         {amount}
-        {suffix ? <span className="text-sm font-bold opacity-60">{suffix}</span> : null}
+        {suffix ? <span className="text-sm font-bold opacity-75">{suffix}</span> : null}
       </span>
     </>
   );
@@ -31,7 +31,7 @@ export function Plans({ kicker = '03 · Planes' }: { kicker?: string }) {
           kicker={kicker}
           title={
             <>
-              Precios claros, <span className="text-muted">sin sorpresas.</span>
+              Precios claros, <span className="hl">sin sorpresas.</span>
             </>
           }
           lead="Un pago inicial por el diseño y desarrollo, y un abono mensual que mantiene tu web online, segura y al día."
@@ -44,12 +44,14 @@ export function Plans({ kicker = '03 · Planes' }: { kicker?: string }) {
               delay={i * 0.06}
               className={cn(
                 'rounded-marca flex min-w-0 flex-col border p-6 md:p-8',
-                p.featured ? 'border-fg bg-fg text-bg' : 'border-line bg-surface',
+                p.featured
+                  ? 'border-accent bg-accent text-on-accent shadow-[0_24px_60px_-30px_var(--accent)] lg:-translate-y-3'
+                  : 'border-line bg-surface hover:border-accent-ink/60 transition-[border-color,transform] duration-300 hover:-translate-y-1',
               )}
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <span className={cn('label-marca', p.featured ? 'opacity-70' : 'text-muted')}>
+                  <span className={cn('label-marca', p.featured ? 'opacity-80' : 'text-muted')}>
                     Plan {String(i + 1).padStart(2, '0')}
                   </span>
                   <h3 className="mt-3 text-2xl font-extrabold tracking-[-0.03em]">{p.name}</h3>
@@ -59,11 +61,11 @@ export function Plans({ kicker = '03 · Planes' }: { kicker?: string }) {
               <dl
                 className={cn(
                   'my-6 grid grid-cols-2 gap-3 border-y py-5',
-                  p.featured ? 'border-bg/20' : 'border-line',
+                  p.featured ? 'border-on-accent/20' : 'border-line',
                 )}
               >
                 <div>
-                  <dt className={cn('kicker !text-[0.6875rem]', p.featured && '!text-current opacity-70')}>
+                  <dt className={cn('kicker !text-[0.6875rem]', p.featured && '!text-current opacity-80')}>
                     Inicial
                   </dt>
                   <dd className="mt-1 text-xl font-extrabold tracking-[-0.03em] tabular-nums md:text-2xl">
@@ -71,7 +73,7 @@ export function Plans({ kicker = '03 · Planes' }: { kicker?: string }) {
                   </dd>
                 </div>
                 <div>
-                  <dt className={cn('kicker !text-[0.6875rem]', p.featured && '!text-current opacity-70')}>
+                  <dt className={cn('kicker !text-[0.6875rem]', p.featured && '!text-current opacity-80')}>
                     Abono
                   </dt>
                   <dd className="mt-1 text-xl font-extrabold tracking-[-0.03em] tabular-nums md:text-2xl">
@@ -92,7 +94,10 @@ export function Plans({ kicker = '03 · Planes' }: { kicker?: string }) {
               <Button
                 asChild
                 variant={p.featured ? 'primary' : 'outline'}
-                className={cn('mt-auto w-full', p.featured && 'border-bg bg-bg text-fg hover:opacity-90')}
+                className={cn(
+                  'mt-auto w-full',
+                  p.featured && 'border-negro bg-negro text-hueso hover:opacity-90',
+                )}
               >
                 <Link href={{ pathname: '/contacto', query: { plan: p.id } }}>Quiero el plan {p.name}</Link>
               </Button>

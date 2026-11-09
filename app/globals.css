@@ -4,8 +4,10 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * Tokens de marca Picture Web Dev (Manual de marca).
- * Negro y hueso, sin color de acento: el contraste sale de invertir.
+ * Tokens de marca Picture Web Dev.
+ * Negro y hueso de base, con un acento amarillo para lo que tiene que destacar
+ * (palabras clave, botón principal, plan destacado, banda de contacto).
+ * Para cambiar el acento, editá --accent (relleno) y --accent-ink (texto) en ambos temas.
  * El verde solo se usa para WhatsApp y confirmaciones.
  */
 :root {
@@ -16,6 +18,9 @@
   --muted: #5e5b55;
   --ok: #1d6b45;
   --danger: #a3271b;
+  --accent: #ffc21a;
+  --accent-ink: #8a5a00; /* amarillo legible como texto sobre blanco (5.6:1) */
+  --on-accent: #0a0a0a;
   color-scheme: light;
 }
 
@@ -27,6 +32,9 @@
   --muted: #9b978f;
   --ok: #5fd69a;
   --danger: #ff8a7a;
+  --accent: #ffc21a;
+  --accent-ink: #ffc21a; /* sobre negro el amarillo puro da 12:1 */
+  --on-accent: #0a0a0a;
   color-scheme: dark;
 }
 
@@ -38,6 +46,9 @@
   --color-muted: var(--muted);
   --color-ok: var(--ok);
   --color-danger: var(--danger);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-on-accent: var(--on-accent);
   --color-negro: #0a0a0a;
   --color-hueso: #e7e3dd;
 
@@ -72,8 +83,8 @@
     text-wrap: balance;
   }
   ::selection {
-    background: var(--fg);
-    color: var(--bg);
+    background: var(--accent);
+    color: var(--on-accent);
   }
   :focus-visible {
     outline: 2px solid var(--fg);
@@ -155,6 +166,195 @@
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-color: var(--line);
+  }
+}
+
+/* ================= Animaciones ================= */
+
+/* Palabras destacadas de los títulos: color de acento + subrayado tipo marcador que se pinta al aparecer */
+.hl {
+  color: var(--accent-ink);
+  background-image: linear-gradient(
+    color-mix(in srgb, var(--accent) 22%, transparent),
+    color-mix(in srgb, var(--accent) 22%, transparent)
+  );
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 100% 0.28em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Entrada del título del hero: cada línea sube desde abajo, escalonada */
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.line-mask > span {
+  display: block;
+  animation: rise 0.9s var(--ease-out-soft, cubic-bezier(0.2, 0.7, 0.2, 1)) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 60ms);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fade-up {
+  animation: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 300ms);
+}
+
+/* Barra de progreso: arranca vacía; donde no hay animación ligada al scroll, no se ve */
+.scroll-progress {
+  transform: scaleX(0);
+}
+
+/* Cinta infinita (marquee) */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Estrella del hero: un giro lento y continuo mientras no hay interacción */
+@keyframes spin-slow {
+  to {
+    rotate: 360deg;
+  }
+}
+.spin-slow {
+  animation: spin-slow 60s linear infinite;
+}
+
+/* Brillo que cruza el botón principal al pasar el mouse */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.btn-shine:hover::after {
+  transform: translateX(120%);
+}
+
+/* Vista previa de los proyectos: al pasar el mouse la captura se desplaza hacia abajo, como si scrollearas la web */
+.preview-pan img {
+  object-position: top center;
+  transition:
+    object-position 3.2s cubic-bezier(0.45, 0, 0.25, 1),
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.group:hover .preview-pan img,
+.group:focus-visible .preview-pan img {
+  object-position: bottom center;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Barra de progreso de lectura arriba de todo */
+    @keyframes grow-x {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+    .scroll-progress {
+      animation: grow-x linear both;
+      animation-timeline: scroll(root);
+    }
+
+    /* El subrayado de las palabras destacadas se "pinta" cuando entran en pantalla */
+    @keyframes paint {
+      from {
+        background-size: 0% 0.28em;
+      }
+      to {
+        background-size: 100% 0.28em;
+      }
+    }
+    .hl {
+      animation: paint linear both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 35%;
+    }
+
+    /* Las capturas se descubren con una cortina al entrar */
+    @keyframes unveil {
+      from {
+        clip-path: inset(0 0 22% 0 round var(--radius-marca) 0 var(--radius-marca) 0);
+        scale: 0.97;
+      }
+      to {
+        clip-path: inset(0 0 0 0 round var(--radius-marca) 0 var(--radius-marca) 0);
+        scale: 1;
+      }
+    }
+    .unveil {
+      animation: unveil linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+
+    /* Los números de los pasos se encienden en amarillo al llegar al centro de la pantalla */
+    @keyframes light-up {
+      0%,
+      100% {
+        color: var(--muted);
+      }
+      40%,
+      60% {
+        color: var(--accent-ink);
+      }
+    }
+    .light-up {
+      animation: light-up linear both;
+      animation-timeline: view();
+      animation-range: cover 20% cover 80%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .line-mask > span,
+  .fade-up,
+  .marquee-track,
+  .spin-slow {
+    animation: none !important;
   }
 }
 

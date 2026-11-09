@@ -3,6 +3,7 @@ import { ContactCTA } from '@/components/sections/ContactCTA';
 import { Faq } from '@/components/sections/Faq';
 import { FeaturedProjects } from '@/components/sections/FeaturedProjects';
 import { Hero } from '@/components/sections/Hero';
+import { Marquee } from '@/components/sections/Marquee';
 import { Plans } from '@/components/sections/Plans';
 import { Process } from '@/components/sections/Process';
 import { Services } from '@/components/sections/Services';
@@ -16,6 +17,9 @@ export default async function HomePage() {
   return (
     <>
       <Hero />
+      <div className="overflow-hidden py-6">
+        <Marquee />
+      </div>
       <FeaturedProjects projects={projects} />
       <Services />
       <Plans />

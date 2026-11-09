@@ -13,7 +13,7 @@ export function About({ kicker = '05 · El estudio', full = false }: { kicker?: 
         <Reveal className="min-w-0">
           <h2 id="estudio-title" className="text-h2 font-extrabold">
             Hola, soy {site.founder.name.split(' ')[0]}.{' '}
-            <span className="text-muted">Del otro lado hay una persona.</span>
+            <span className="hl">Del otro lado hay una persona.</span>
           </h2>
           <div className="text-muted mt-6 grid max-w-[62ch] gap-4 md:text-lg">
             <p>

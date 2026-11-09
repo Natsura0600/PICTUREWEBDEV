@@ -21,7 +21,7 @@ export default function StudioPage() {
           kicker="El estudio"
           title={
             <>
-              Un estudio chico, <span className="text-muted">a propósito.</span>
+              Un estudio chico, <span className="hl">a propósito.</span>
             </>
           }
           lead="Pocos proyectos a la vez, para dedicarle a cada uno el tiempo que necesita. Diseño y código hechos por la misma persona que te atiende."

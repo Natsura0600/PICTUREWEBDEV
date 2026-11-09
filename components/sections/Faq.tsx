@@ -8,7 +8,7 @@ export function Faq() {
         <div>
           <p className="kicker">Preguntas frecuentes</p>
           <h2 id="faq-title" className="text-h2 mt-4 font-extrabold">
-            Lo que todos <span className="text-muted">preguntan primero.</span>
+            Lo que todos <span className="hl">preguntan primero.</span>
           </h2>
         </div>
         <div className="border-line border-t">
