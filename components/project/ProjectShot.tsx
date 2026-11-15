@@ -11,6 +11,8 @@ type Props = {
   sizes: string;
   priority?: boolean;
   className?: string;
+  /** false: la captura queda quieta al pasar el mouse (sin desplazamiento). */
+  pan?: boolean;
   /** Nombre compartido entre la tarjeta y el caso: la captura "viaja" de una página a la otra. */
   transitionName?: string;
 };
@@ -25,7 +27,17 @@ export const livePreview = (url: string): string =>
  * - Al pasar el mouse, la imagen se desplaza hacia abajo como si se scrolleara la página.
  * - Al entrar en pantalla se descubre con una cortina (CSS, sin JavaScript).
  */
-export function ProjectShot({ title, host, url, image, sizes, priority, className, transitionName }: Props) {
+export function ProjectShot({
+  title,
+  host,
+  url,
+  image,
+  sizes,
+  priority,
+  className,
+  pan = true,
+  transitionName,
+}: Props) {
   const shot = (
     <div className={cn('unveil rounded-marca border-line bg-surface overflow-hidden border', className)}>
       <div className="border-line flex items-center gap-2 border-b px-4 py-2.5" aria-hidden="true">
@@ -34,7 +46,12 @@ export function ProjectShot({ title, host, url, image, sizes, priority, classNam
         <span className="size-2 rounded-full bg-[#28c840]" />
         <span className="bg-bg text-muted ml-2 truncate rounded px-2.5 py-0.5 text-[0.6875rem]">{host}</span>
       </div>
-      <div className="preview-pan relative aspect-[16/10] bg-[linear-gradient(110deg,var(--surface)_30%,var(--line)_50%,var(--surface)_70%)]">
+      <div
+        className={cn(
+          pan && 'preview-pan',
+          'relative aspect-[16/10] bg-[linear-gradient(110deg,var(--surface)_30%,var(--line)_50%,var(--surface)_70%)]',
+        )}
+      >
         {image ? (
           <Image
             src={image.src}

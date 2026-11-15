@@ -9,6 +9,8 @@ type Props = { project: Project; index: number; priority?: boolean; headingLevel
 
 export function ProjectCard({ project, index, priority, headingLevel: H = 'h3' }: Props) {
   const { slug, meta } = project;
+  // Solo Drop Rugby conserva la animación al pasar el mouse; los demás quedan quietos
+  const animated = slug === 'drop-rugby';
   const n = String(index + 1).padStart(2, '0');
   return (
     <Reveal as="article" className="group min-w-0">
@@ -25,7 +27,12 @@ export function ProjectCard({ project, index, priority, headingLevel: H = 'h3' }
           image={coverOf(project)}
           sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw"
           priority={priority}
-          className="group-hover:border-muted [&_img]:ease-out-soft transition-[border-color] duration-300 [&_img]:transition-transform [&_img]:duration-700 group-hover:[&_img]:scale-[1.02]"
+          pan={animated}
+          className={
+            animated
+              ? 'group-hover:border-muted [&_img]:ease-out-soft transition-[border-color] duration-300 [&_img]:transition-transform [&_img]:duration-700 group-hover:[&_img]:scale-[1.02]'
+              : undefined
+          }
         />
         <div className="flex flex-col gap-2 pt-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <div className="min-w-0">
