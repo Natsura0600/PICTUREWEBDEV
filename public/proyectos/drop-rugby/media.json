@@ -1,0 +1,20 @@
+{
+  "images": [
+    {
+      "src": "/proyectos/drop-rugby/desktop.webp",
+      "width": 1600,
+      "height": 1000,
+      "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoQAAoAA4BaJbAC7AEf8NgFP/1gAP7vovxD6BX2jqhvtAFsZxBXxwi09LzDS8Yv5XQLUljdnkZOhSUn3htCNYET6KWYvoWkKa8jBJRHagTJctB4uH2Wbx/0AAA=",
+      "device": "desktop",
+      "alt": "Drop Rugby: vista en computadora"
+    },
+    {
+      "src": "/proyectos/drop-rugby/mobile.webp",
+      "width": 780,
+      "height": 1688,
+      "blur": "data:image/webp;base64,UklGRuIAAABXRUJQVlA4INYAAAAwBQCdASoQACMAPu1mqU6ppaOiKqwBMB2JagC/U1/DyfvSTq9eonRILfd3+Jee2mBVAAD+9IBNrFsq7CZ/RC2+lrR4umIL4n7XGyLQ0dTlNi2LjAw5EGIR+ac1gZYHsY3GDJ0nbA3Y5K8Dg3eGblL7d1xrEtGdLENSspR7fAva7/2XZlXVy0hqs3PRtpg3Wt6y3u4M8qDlzLdMxjML7ffZf5DrYDOSK/fTHHpfzOZPnUKdFh+TOvGG84F0qpoSVT/Fypq/8l4A0LMHvE2KOqzqmFZAwAAA",
+      "device": "mobile",
+      "alt": "Drop Rugby: vista en celular"
+    }
+  ]
+}
