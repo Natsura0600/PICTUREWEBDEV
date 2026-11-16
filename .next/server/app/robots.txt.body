@@ -1,7 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /admin
-Disallow: /admin.html
-Disallow: /api/
-
-Sitemap: https://picturewebdev.vercel.app/sitemap.xml
