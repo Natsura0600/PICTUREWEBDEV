@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Star } from '@/components/brand/Star';
 import { Wordmark } from '@/components/brand/Wordmark';
 import { Button } from '@/components/ui/button';
+import { whatsappUrl } from '@/lib/site';
 import { MobileNav } from './MobileNav';
 import { NavLinks } from './NavLinks';
 import { ThemeToggle } from './ThemeToggle';
@@ -20,7 +21,9 @@ export function Header() {
         <div className="flex items-center gap-2">
           <ThemeToggle className="hidden md:inline-flex" />
           <Button asChild size="sm" className="hidden md:inline-flex">
-            <Link href="/contacto">Pedí tu propuesta</Link>
+            <a href={whatsappUrl('Hola, quiero una página web para mi negocio')} target="_blank" rel="noopener noreferrer">
+              Escribinos por WhatsApp
+            </a>
           </Button>
           <MobileNav />
         </div>

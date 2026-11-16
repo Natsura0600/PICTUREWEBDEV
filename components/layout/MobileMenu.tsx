@@ -1,7 +1,6 @@
 'use client';
 
 import { X } from 'lucide-react';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle } from '@/components/ui/sheet';
 import { site, whatsappUrl } from '@/lib/site';
@@ -32,13 +31,13 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
         </nav>
         <div className="mt-auto flex flex-col gap-3">
           <Button asChild>
-            <Link href="/contacto" onClick={onClose}>
-              Pedí tu propuesta
-            </Link>
-          </Button>
-          <Button asChild variant="whatsapp">
             <a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
               WhatsApp {site.whatsapp.display}
+            </a>
+          </Button>
+          <Button asChild variant="outline">
+            <a href={site.formUrl} target="_blank" rel="noopener noreferrer">
+              Completá el formulario
             </a>
           </Button>
           <ThemeToggle className="self-start" />

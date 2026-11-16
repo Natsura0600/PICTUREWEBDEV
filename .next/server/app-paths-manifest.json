@@ -1,0 +1,18 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/auth/route": "app/api/auth/route.js",
+  "/api/lead/route": "app/api/lead/route.js",
+  "/api/projects/route": "app/api/projects/route.js",
+  "/contacto/page": "app/contacto/page.js",
+  "/estudio/page": "app/estudio/page.js",
+  "/opengraph-image/route": "app/opengraph-image/route.js",
+  "/page": "app/page.js",
+  "/privacidad/page": "app/privacidad/page.js",
+  "/proyectos/[slug]/opengraph-image/route": "app/proyectos/[slug]/opengraph-image/route.js",
+  "/proyectos/[slug]/page": "app/proyectos/[slug]/page.js",
+  "/proyectos/page": "app/proyectos/page.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/servicios/page": "app/servicios/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js"
+}

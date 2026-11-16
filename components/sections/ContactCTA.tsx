@@ -1,5 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
+import { FileText, MessageCircle } from 'lucide-react';
 import { Star } from '@/components/brand/Star';
 import { Button } from '@/components/ui/button';
 import { site, whatsappUrl } from '@/lib/site';
@@ -18,18 +17,20 @@ export function ContactCTA() {
         </div>
         <div className="flex flex-col gap-3">
           <Button asChild className="border-negro bg-negro text-hueso hover:opacity-90">
-            <Link href="/contacto">
-              Pedí tu propuesta <ArrowUpRight aria-hidden="true" />
-            </Link>
+            <a
+              href={whatsappUrl('Hola, quiero una página web para mi negocio')}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MessageCircle aria-hidden="true" /> Escribinos por WhatsApp
+            </a>
           </Button>
-          <a
-            href={whatsappUrl('Hola, quiero una página web para mi negocio')}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-center text-sm font-bold underline underline-offset-4 opacity-80 hover:opacity-100"
-          >
-            O escribinos por WhatsApp: {site.whatsapp.display}
-          </a>
+          <Button asChild variant="outline" className="border-negro text-current hover:bg-negro/10">
+            <a href={site.formUrl} target="_blank" rel="noopener noreferrer">
+              <FileText aria-hidden="true" /> Completá el formulario
+            </a>
+          </Button>
+          <p className="text-center text-sm font-bold opacity-80">{site.whatsapp.display}</p>
         </div>
       </div>
     </section>

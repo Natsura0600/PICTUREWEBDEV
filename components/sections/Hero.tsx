@@ -1,9 +1,8 @@
-import { ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
+import { FileText, MessageCircle } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { Tagline, Wordmark } from '@/components/brand/Wordmark';
 import { Button } from '@/components/ui/button';
-import { site } from '@/lib/site';
+import { site, whatsappUrl } from '@/lib/site';
 import { HeroStarLazy } from './HeroStarLazy';
 
 const i = (n: number) => ({ '--i': n }) as CSSProperties;
@@ -48,14 +47,20 @@ export function Hero() {
             Diseñamos páginas web, turnos online y paneles a medida para negocios que quieren vender más y
             perder menos tiempo. Desde Luján, para todo el país.
           </p>
-          <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row md:mt-10" style={i(3)}>
+          <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-10" style={i(3)}>
             <Button asChild>
-              <Link href="/contacto">
-                Pedí tu propuesta <ArrowUpRight aria-hidden="true" />
-              </Link>
+              <a
+                href={whatsappUrl('Hola, quiero una página web para mi negocio')}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MessageCircle aria-hidden="true" /> Escribinos por WhatsApp
+              </a>
             </Button>
             <Button asChild variant="outline">
-              <Link href="/proyectos">Ver proyectos</Link>
+              <a href={site.formUrl} target="_blank" rel="noopener noreferrer">
+                <FileText aria-hidden="true" /> Completá el formulario
+              </a>
             </Button>
           </div>
           <p className="text-muted fade-up mt-4 text-sm" style={i(4)}>

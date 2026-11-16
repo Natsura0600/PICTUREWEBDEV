@@ -18,6 +18,7 @@ export const site = {
     display: '+54 9 11 5249-5689',
     number: '5491152495689',
   },
+  formUrl: 'https://forms.gle/4CQdifqFRH7pmBdU9',
   /** Cargá acá tus redes cuando quieras mostrarlas (footer, contacto y JSON-LD). */
   socials: [] as ReadonlyArray<{ label: string; href: string }>,
   responseTime: 'menos de 24 horas',
@@ -66,69 +67,6 @@ export const services: readonly Service[] = [
   },
 ];
 
-export type Plan = {
-  id: string;
-  name: string;
-  sub: string;
-  setup: string;
-  monthly: string;
-  items: readonly string[];
-  featured?: boolean;
-  tipo: string;
-};
-
-export const plans: readonly Plan[] = [
-  {
-    id: 'presencia',
-    name: 'Presencia',
-    sub: 'Landing o web informativa',
-    setup: 'USD 150',
-    monthly: 'USD 20',
-    tipo: 'Landing page',
-    items: [
-      'Página con secciones a medida',
-      'Diseño adaptado a celular',
-      'Botón de WhatsApp y formulario',
-      'Hosting y certificado SSL',
-      '1 cambio de texto o imagen por mes',
-    ],
-  },
-  {
-    id: 'negocio',
-    name: 'Negocio',
-    sub: 'Web con panel autoadministrable',
-    setup: 'USD 250',
-    monthly: 'USD 30',
-    tipo: 'Sitio institucional',
-    items: [
-      'Todo lo del plan Presencia',
-      'Panel para editar tu contenido',
-      'Carga de fotos desde el panel',
-      'Base de datos y copias de seguridad',
-      'Soporte por WhatsApp',
-    ],
-  },
-  {
-    id: 'sistema',
-    name: 'Sistema',
-    sub: 'Turnos o pedidos online',
-    setup: 'desde USD 300',
-    monthly: 'desde USD 35',
-    tipo: 'Sistema a medida',
-    featured: true,
-    items: [
-      'Todo lo del plan Negocio',
-      'Turnos o pedidos online',
-      'Varios profesionales, canchas o locales',
-      'Panel de gestión',
-      'Mantenimiento y soporte prioritario',
-    ],
-  },
-];
-
-export const plansNote =
-  'Precios en dólares; se pueden abonar en pesos al tipo de cambio del día. 50% al comenzar y 50% al entregar. El abono se paga del 1 al 10 de cada mes. El dominio corre por cuenta del cliente. También hay una opción sin pago inicial desde USD 35 por mes, con permanencia de 12 meses.';
-
 export type Step = { title: string; text: string };
 
 export const steps: readonly Step[] = [
@@ -138,7 +76,7 @@ export const steps: readonly Step[] = [
   },
   {
     title: 'Te pasamos una propuesta',
-    text: 'Alcance, plan, precio y fecha de entrega por escrito. Sin letra chica.',
+    text: 'Alcance, presupuesto y fecha de entrega por escrito. Sin letra chica.',
   },
   {
     title: 'Diseñamos y desarrollamos',
@@ -172,11 +110,15 @@ export const faqs = [
   },
   {
     q: '¿Qué incluye el abono mensual?',
-    a: 'Hosting, certificado de seguridad, copias de respaldo, mantenimiento técnico, los cambios del plan y soporte directo por WhatsApp.',
+    a: 'Hosting, certificado de seguridad, copias de respaldo, mantenimiento técnico, cambios del mes y soporte directo por WhatsApp.',
   },
   {
     q: '¿Puedo editar mi web yo mismo?',
-    a: 'Sí, en los planes Negocio y Sistema tenés un panel propio para cambiar textos, fotos, precios o turnos sin depender de nadie.',
+    a: 'Sí, en los sitios con panel y en los sistemas a medida tenés un panel propio para cambiar textos, fotos, precios o turnos sin depender de nadie.',
+  },
+  {
+    q: '¿Cuánto cuesta?',
+    a: 'Depende de lo que necesites: no es lo mismo una landing que un sistema de turnos. Contanos tu idea por WhatsApp o por el formulario y te pasamos un presupuesto por escrito, sin compromiso.',
   },
   {
     q: '¿Trabajan solo en Luján?',

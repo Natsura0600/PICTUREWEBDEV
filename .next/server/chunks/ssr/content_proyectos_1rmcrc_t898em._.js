@@ -1,0 +1,3 @@
+module.exports=[13272,a=>{a.v(b=>Promise.all(["server/chunks/ssr/_1xvq-6ba8oyms._.js"].map(b=>a.l(b))).then(()=>b(91120)))},76239,a=>{a.v(b=>Promise.all(["server/chunks/ssr/_0sofknd31nrmn._.js"].map(b=>a.l(b))).then(()=>b(16011)))},33177,a=>{a.v(b=>Promise.all(["server/chunks/ssr/mdx-components_tsx_1ll-exid_z737._.js","server/chunks/ssr/content_proyectos_drop-rugby_mdx_tsx_1lik-f8txx-t9._.js"].map(b=>a.l(b))).then(()=>b(99579)))},17758,a=>{a.v(b=>Promise.all(["server/chunks/ssr/_0rs3w-9rserd5._.js"].map(b=>a.l(b))).then(()=>b(27574)))},75649,a=>{a.v(b=>Promise.all(["server/chunks/ssr/_18ui88vny33-1._.js"].map(b=>a.l(b))).then(()=>b(14514)))}];
+
+//# sourceMappingURL=content_proyectos_1rmcrc_t898em._.js.map

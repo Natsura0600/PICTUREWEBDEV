@@ -70,7 +70,6 @@ export function organizationJsonLd(): JsonLd[] {
       ],
       founder: { '@id': personId },
       sameAs: site.socials.map((s) => s.href),
-      priceRange: 'USD 150 – USD 300+',
     },
     {
       '@context': 'https://schema.org',

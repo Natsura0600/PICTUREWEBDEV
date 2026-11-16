@@ -32,6 +32,11 @@ export function Footer() {
                 WhatsApp
               </a>
             </li>
+            <li>
+              <a href={site.formUrl} target="_blank" rel="noopener noreferrer" className="hover:text-fg">
+                Formulario
+              </a>
+            </li>
             {site.socials.map((s) => (
               <li key={s.href}>
                 <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-fg">

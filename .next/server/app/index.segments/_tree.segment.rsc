@@ -1,0 +1,6 @@
+:HL["/_next/static/chunks/44ganzdjqrzgb.css","style"]
+:HL["/_next/static/media/open_sans_latin_400_normal-s.p.17itlqu12ovlk.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/open_sans_latin_700_normal-s.p.1a7rylksl__qm.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/_next/static/media/open_sans_latin_800_normal-s.p.09olmte8dxjlj.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+1:[["children",{"s":"__PAGE__","h":128}]]
+0:{"b":"MMlFdgZxvTnUN8itWpS_I","t":{"t":{"s":"","h":16,"c":"$Q1"}}}

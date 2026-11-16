@@ -13,8 +13,8 @@ test.describe('Formulario de contacto', () => {
   });
 
   test('envía una consulta válida y conserva lo escrito tras un error', async ({ page }) => {
-    await page.goto('/contacto?plan=sistema');
-    await expect(page.getByLabel('¿Qué necesitás?')).toHaveValue('Sistema a medida');
+    await page.goto('/contacto');
+    await page.getByLabel('¿Qué necesitás?').selectOption({ index: 1 });
 
     await page.getByLabel('Nombre y apellido').fill('María López');
     await page.getByLabel('Email').fill('maria@');
