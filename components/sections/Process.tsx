@@ -1,7 +1,7 @@
 import { Reveal } from '@/components/motion/Reveal';
 import { steps } from '@/lib/site';
 
-export function Process({ kicker = '03 · Cómo trabajamos' }: { kicker?: string }) {
+export function Process({ kicker = '04 · Cómo trabajamos' }: { kicker?: string }) {
   return (
     <section aria-labelledby="proceso-title" className="border-line border-t py-20 md:py-28">
       <div className="wrap grid gap-10 md:grid-cols-[minmax(0,.7fr)_minmax(0,1.3fr)] md:gap-16">
@@ -11,7 +11,7 @@ export function Process({ kicker = '03 · Cómo trabajamos' }: { kicker?: string
             Menos vueltas. <span className="hl">Mejores herramientas.</span>
           </h2>
         </Reveal>
-        <ol className="border-line border-t">
+        <ol className="process-line border-line relative border-t pl-5 md:pl-7">
           {steps.map((s, i) => (
             <Reveal
               as="li"

@@ -19,21 +19,23 @@ export function ProjectCard({ project, index, priority, headingLevel: H = 'h3' }
         className="block focus-visible:outline-offset-4"
         aria-label={`${meta.title}: ver caso`}
       >
-        <ProjectShot
-          title={meta.title}
-          host={hostOf(meta.url)}
-          url={meta.url}
-          transitionName={`shot-${slug}`}
-          image={coverOf(project)}
-          sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw"
-          priority={priority}
-          pan={animated}
-          className={
-            animated
-              ? 'group-hover:border-muted [&_img]:ease-out-soft transition-[border-color] duration-300 [&_img]:transition-transform [&_img]:duration-700 group-hover:[&_img]:scale-[1.02]'
-              : undefined
-          }
-        />
+        <div data-tilt="5" className="tilt rounded-marca">
+          <ProjectShot
+            title={meta.title}
+            host={hostOf(meta.url)}
+            url={meta.url}
+            transitionName={`shot-${slug}`}
+            image={coverOf(project)}
+            sizes="(min-width: 1024px) 600px, (min-width: 768px) 50vw, 100vw"
+            priority={priority}
+            pan={animated}
+            className={
+              animated
+                ? 'group-hover:border-muted [&_img]:ease-out-soft transition-[border-color] duration-300 [&_img]:transition-transform [&_img]:duration-700 group-hover:[&_img]:scale-[1.02]'
+                : undefined
+            }
+          />
+        </div>
         <div className="flex flex-col gap-2 pt-5 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <div className="min-w-0">
             <H className="text-xl font-bold tracking-[-0.025em] md:text-2xl">{meta.title}</H>

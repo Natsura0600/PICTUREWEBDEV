@@ -33,8 +33,9 @@ export function Services({
             <Reveal
               as="li"
               key={s.id}
+              data-spotlight
               delay={i * 0.06}
-              className="border-line flex min-w-0 flex-col border-r border-b p-6 md:p-8"
+              className="spot-card border-line flex min-w-0 flex-col border-r border-b p-6 md:p-8"
             >
               <span className="label-marca text-muted">{String(i + 1).padStart(2, '0')}</span>
               <h3 className="mt-10 text-2xl font-bold tracking-[-0.025em] md:mt-14">{s.title}</h3>

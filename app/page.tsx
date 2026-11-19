@@ -4,6 +4,7 @@ import { Faq } from '@/components/sections/Faq';
 import { FeaturedProjects } from '@/components/sections/FeaturedProjects';
 import { Hero } from '@/components/sections/Hero';
 import { Marquee } from '@/components/sections/Marquee';
+import { ProjectBuilder } from '@/components/sections/ProjectBuilder';
 import { Process } from '@/components/sections/Process';
 import { Services } from '@/components/sections/Services';
 import { Testimonials } from '@/components/sections/Testimonials';
@@ -15,12 +16,13 @@ export default async function HomePage() {
   const projects = await getProjects();
   return (
     <>
-      <Hero />
-      <div className="overflow-hidden py-6">
+      <Hero projectCount={projects.length} />
+      <div className="overflow-hidden">
         <Marquee />
       </div>
       <FeaturedProjects projects={projects} />
       <Services />
+      <ProjectBuilder />
       <Process />
       <About />
       <Testimonials />

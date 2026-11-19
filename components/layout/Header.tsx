@@ -20,8 +20,12 @@ export function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <ThemeToggle className="hidden md:inline-flex" />
-          <Button asChild size="sm" className="hidden md:inline-flex">
-            <a href={whatsappUrl('Hola, quiero una página web para mi negocio')} target="_blank" rel="noopener noreferrer">
+          <Button asChild size="sm" data-magnetic="0.2" className="magnetic hidden md:inline-flex">
+            <a
+              href={whatsappUrl('Hola, quiero una página web para mi negocio')}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Escribinos por WhatsApp
             </a>
           </Button>

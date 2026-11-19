@@ -1,7 +1,12 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-type Props = { children: ReactNode; className?: string; delay?: number; as?: 'div' | 'li' | 'article' };
+type Props = {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  as?: 'div' | 'li' | 'article';
+} & Record<`data-${string}`, string | boolean | undefined>;
 
 /**
  * Aparición suave al entrar en pantalla, con animación CSS ligada al scroll (animation-timeline: view()).
@@ -9,10 +14,10 @@ type Props = { children: ReactNode; className?: string; delay?: number; as?: 'di
  * - Nunca deja contenido oculto: si el navegador no la soporta, o si alguien salta con el scroll,
  *   el contenido ya está visible. Con "reducir movimiento" no anima.
  */
-export function Reveal({ children, className, delay = 0, as: Comp = 'div' }: Props) {
+export function Reveal({ children, className, delay = 0, as: Comp = 'div', ...data }: Props) {
   const style = delay ? ({ '--reveal-delay': `${delay * 40}%` } as CSSProperties) : undefined;
   return (
-    <Comp className={cn('reveal', className)} style={style}>
+    <Comp className={cn('reveal', className)} style={style} {...data}>
       {children}
     </Comp>
   );

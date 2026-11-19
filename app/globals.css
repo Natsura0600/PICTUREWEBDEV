@@ -358,6 +358,188 @@
   }
 }
 
+/* ================= Interacción (ver components/motion/PointerFx) ================= */
+
+/* Cinta de abajo: va en sentido contrario */
+.marquee-track--reverse {
+  animation-direction: reverse;
+  animation-duration: 52s;
+}
+
+/* Fondo de partículas del hero: aparece suave cuando carga */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+.hero-field {
+  animation: fade-in 1.4s ease-out both;
+}
+
+/* Punto "en vivo" del kicker del hero */
+@keyframes pulse-dot {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 70%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 10px transparent;
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2.2s ease-out infinite;
+}
+
+/* Botones magnéticos: siguen un poco al cursor */
+.fx-pointer .magnetic {
+  transform: translate(var(--tx, 0px), var(--ty, 0px));
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s,
+    opacity 0.2s;
+}
+
+/* Tarjetas que se inclinan en 3D hacia el cursor, con un reflejo de luz */
+.tilt {
+  position: relative;
+}
+.fx-pointer .tilt {
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform;
+}
+.fx-pointer .tilt[data-active] {
+  transition: transform 0.12s linear;
+}
+.fx-pointer .tilt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--gx, 50%) var(--gy, 50%),
+    rgb(255 255 255 / 0.14),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.fx-pointer .tilt[data-active]::after {
+  opacity: 1;
+}
+
+/* Foco de luz amarillo que sigue al cursor dentro de la tarjeta */
+.spot-card {
+  position: relative;
+  isolation: isolate;
+  transition: background-color 0.3s;
+}
+.fx-pointer .spot-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    22rem circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 13%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+.fx-pointer .spot-card:hover::before {
+  opacity: 1;
+}
+.spot-card:hover {
+  background-color: color-mix(in srgb, var(--surface) 60%, transparent);
+}
+
+/* Piezas de la vista previa de "Armá tu proyecto": entran con un pequeño rebote */
+@keyframes wf-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+}
+.wf-in {
+  animation: wf-in 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+@keyframes msg-in {
+  from {
+    opacity: 0.2;
+    transform: translateY(4px);
+  }
+}
+.msg-in {
+  animation: msg-in 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Preguntas frecuentes: se abren con una transición de altura donde el navegador lo permite */
+:root {
+  interpolate-size: allow-keywords;
+}
+details::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+    content-visibility 0.4s allow-discrete;
+}
+details[open]::details-content {
+  block-size: auto;
+}
+
+/* Proceso: una línea amarilla se completa a medida que bajás */
+.process-line::before,
+.process-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+}
+.process-line::before {
+  background: var(--line);
+}
+.process-line::after {
+  background: var(--accent);
+  transform-origin: top;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes grow-y {
+      from {
+        transform: scaleY(0);
+      }
+      to {
+        transform: scaleY(1);
+      }
+    }
+    .process-line::after {
+      animation: grow-y linear both;
+      animation-timeline: view();
+      animation-range: cover 15% cover 65%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-dot,
+  .hero-field,
+  .wf-in,
+  .msg-in {
+    animation: none !important;
+  }
+}
+
 /* ================= Transiciones entre páginas (View Transitions) ================= */
 
 /* El header, el footer y el botón de WhatsApp quedan quietos: solo se mueve el contenido */

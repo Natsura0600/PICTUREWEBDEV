@@ -16,7 +16,11 @@ export function ContactCTA() {
           </h2>
         </div>
         <div className="flex flex-col gap-3">
-          <Button asChild className="border-negro bg-negro text-hueso hover:opacity-90">
+          <Button
+            asChild
+            data-magnetic="0.2"
+            className="magnetic border-negro bg-negro text-hueso hover:opacity-90"
+          >
             <a
               href={whatsappUrl('Hola, quiero una página web para mi negocio')}
               target="_blank"
@@ -25,7 +29,7 @@ export function ContactCTA() {
               <MessageCircle aria-hidden="true" /> Escribinos por WhatsApp
             </a>
           </Button>
-          <Button asChild variant="outline" className="border-negro text-current hover:bg-negro/10">
+          <Button asChild variant="outline" className="border-negro hover:bg-negro/10 text-current">
             <a href={site.formUrl} target="_blank" rel="noopener noreferrer">
               <FileText aria-hidden="true" /> Completá el formulario
             </a>
