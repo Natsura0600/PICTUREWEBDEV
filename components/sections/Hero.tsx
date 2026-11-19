@@ -1,6 +1,7 @@
 import { FileText, MessageCircle } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { CountUp } from '@/components/motion/CountUp';
+import { SplitLetters } from '@/components/motion/SplitLetters';
 import { Button } from '@/components/ui/button';
 import { site, whatsappUrl } from '@/lib/site';
 import { HeroFieldLazy } from './HeroFieldLazy';
@@ -41,19 +42,27 @@ export function Hero({ projectCount }: { projectCount: number }) {
             </p>
             <h1 id="hero-title" className="text-display mt-5 font-extrabold">
               <span className="line-mask">
-                <span style={i(0)}>Webs y sistemas</span>
+                <span style={i(0)}>
+                  <SplitLetters text="Webs y sistemas" />
+                </span>
               </span>
               <span className="line-mask">
-                <span style={i(1)}>que hacen</span>
+                <span style={i(1)}>
+                  <SplitLetters text="que hacen" />
+                </span>
               </span>
               <span className="line-mask">
                 <span style={i(2)}>
-                  <span className="hl">trabajar a tu</span>
+                  <span className="hl">
+                    <SplitLetters text="trabajar a tu" />
+                  </span>
                 </span>
               </span>
               <span className="line-mask">
                 <span style={i(3)}>
-                  <span className="hl">negocio.</span>
+                  <span className="hl">
+                    <SplitLetters text="negocio." />
+                  </span>
                 </span>
               </span>
             </h1>
@@ -84,7 +93,7 @@ export function Hero({ projectCount }: { projectCount: number }) {
             </div>
             <p className="text-muted fade-up mt-4 text-sm" style={i(4)}>
               Te respondemos en {site.responseTime}.
-              <span className="hidden md:inline"> Mové el mouse sobre el fondo ✦</span>
+              <span className="hidden md:inline"> Probá mover el mouse o arrastrar la estrella ✦</span>
             </p>
           </div>
           <div className="order-first w-28 sm:w-36 md:order-none md:w-full md:max-w-[26rem] md:justify-self-end">

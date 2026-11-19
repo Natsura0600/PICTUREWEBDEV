@@ -1,11 +1,20 @@
 import Link from 'next/link';
 import { Tagline, Wordmark } from '@/components/brand/Wordmark';
+import { SplitLetters } from '@/components/motion/SplitLetters';
 import { nav, site, whatsappUrl } from '@/lib/site';
 
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-line border-t">
+    <footer className="border-line overflow-hidden border-t">
+      <div className="wrap pt-14 md:pt-20">
+        <p aria-hidden="true" className="footer-giant text-[clamp(2.6rem,10.4vw,9.5rem)] leading-[0.9] font-extrabold tracking-[-0.06em] whitespace-nowrap">
+          <SplitLetters text="Picture Web Dev" />
+          <span aria-hidden="true" className="text-accent-ink">
+            .
+          </span>
+        </p>
+      </div>
       <div className="wrap grid gap-10 pt-12 pb-[calc(6rem+env(safe-area-inset-bottom))] md:grid-cols-[1fr_auto_1fr] md:items-end">
         <div>
           <Wordmark />

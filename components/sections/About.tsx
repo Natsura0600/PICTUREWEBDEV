@@ -3,7 +3,7 @@ import { Reveal } from '@/components/motion/Reveal';
 import { site, technologies } from '@/lib/site';
 
 /** Presentación personal (sin foto por ahora). */
-export function About({ kicker = '05 · El estudio', full = false }: { kicker?: string; full?: boolean }) {
+export function About({ kicker = '04 · El estudio', full = false }: { kicker?: string; full?: boolean }) {
   return (
     <section aria-labelledby="estudio-title" className="border-line border-t py-20 md:py-28">
       <div className="wrap grid gap-10 md:grid-cols-[minmax(0,.7fr)_minmax(0,1.3fr)] md:gap-16">

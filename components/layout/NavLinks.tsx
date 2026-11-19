@@ -18,7 +18,7 @@ export function NavLinks({ className, onNavigate }: { className?: string; onNavi
               href={item.href}
               onClick={onNavigate}
               aria-current={active ? 'page' : undefined}
-              className={cn('hover:text-fg transition-colors', active ? 'text-fg' : 'text-muted')}
+              className={cn('nav-link hover:text-fg transition-colors', active ? 'text-fg' : 'text-muted')}
             >
               {item.label}
             </Link>

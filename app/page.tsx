@@ -4,7 +4,7 @@ import { Faq } from '@/components/sections/Faq';
 import { FeaturedProjects } from '@/components/sections/FeaturedProjects';
 import { Hero } from '@/components/sections/Hero';
 import { Marquee } from '@/components/sections/Marquee';
-import { ProjectBuilder } from '@/components/sections/ProjectBuilder';
+import { Statement } from '@/components/sections/Statement';
 import { Process } from '@/components/sections/Process';
 import { Services } from '@/components/sections/Services';
 import { Testimonials } from '@/components/sections/Testimonials';
@@ -22,7 +22,7 @@ export default async function HomePage() {
       </div>
       <FeaturedProjects projects={projects} />
       <Services />
-      <ProjectBuilder />
+      <Statement />
       <Process />
       <About />
       <Testimonials />

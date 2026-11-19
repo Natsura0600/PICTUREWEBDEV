@@ -1,7 +1,7 @@
 import { Reveal } from '@/components/motion/Reveal';
 import { steps } from '@/lib/site';
 
-export function Process({ kicker = '04 · Cómo trabajamos' }: { kicker?: string }) {
+export function Process({ kicker = '03 · Cómo trabajamos' }: { kicker?: string }) {
   return (
     <section aria-labelledby="proceso-title" className="border-line border-t py-20 md:py-28">
       <div className="wrap grid gap-10 md:grid-cols-[minmax(0,.7fr)_minmax(0,1.3fr)] md:gap-16">

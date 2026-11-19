@@ -26,7 +26,7 @@ export function MobileMenu({ onClose }: { onClose: () => void }) {
         <nav aria-label="Principal (celular)" className="mt-10">
           <NavLinks
             onNavigate={onClose}
-            className="[&_a]:border-line flex flex-col text-2xl font-extrabold tracking-[-0.03em] [&_a]:block [&_a]:border-b [&_a]:py-4"
+            className="[&_a]:border-line flex flex-col text-2xl font-extrabold tracking-[-0.03em] [&_.nav-link]:after:hidden [&_a]:block [&_a]:border-b [&_a]:py-4"
           />
         </nav>
         <div className="mt-auto flex flex-col gap-3">
