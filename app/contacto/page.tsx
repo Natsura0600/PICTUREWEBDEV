@@ -21,6 +21,26 @@ export default function ContactPage() {
             Leemos cada consulta y te respondemos en {site.responseTime} con preguntas concretas o una
             propuesta con precio y plazo.
           </p>
+          <ol className="mt-10 grid gap-4">
+            {[
+              {
+                t: 'Te respondemos',
+                d: `En ${site.responseTime}, con preguntas concretas sobre tu negocio.`,
+              },
+              { t: 'Charlamos', d: 'Una llamada o mensajes cortos para entender qué necesitás.' },
+              { t: 'Propuesta por escrito', d: 'Alcance, presupuesto y fecha de entrega. Sin compromiso.' },
+            ].map((step, n) => (
+              <li key={step.t} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3">
+                <span className="bg-accent text-on-accent grid size-8 place-items-center rounded-full text-sm font-extrabold">
+                  {n + 1}
+                </span>
+                <div>
+                  <p className="font-bold">{step.t}</p>
+                  <p className="text-muted text-sm">{step.d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
           <div className="border-line mt-10 grid gap-3 border-t pt-6">
             <p className="kicker">¿Preferís otra vía?</p>
             <Button asChild variant="whatsapp" className="justify-self-start">

@@ -2,6 +2,7 @@ import { About } from '@/components/sections/About';
 import { ContactCTA } from '@/components/sections/ContactCTA';
 import { Faq } from '@/components/sections/Faq';
 import { FeaturedProjects } from '@/components/sections/FeaturedProjects';
+import { SectionIndex } from '@/components/layout/SectionIndex';
 import { Hero } from '@/components/sections/Hero';
 import { Marquee } from '@/components/sections/Marquee';
 import { Included } from '@/components/sections/Included';
@@ -32,6 +33,19 @@ export default async function HomePage() {
       <Testimonials />
       <Faq />
       <ContactCTA />
+      <SectionIndex
+        items={[
+          { id: 'hero-title', label: 'Inicio' },
+          { id: 'proyectos-title', label: 'Proyectos' },
+          { id: 'servicios-title', label: 'Servicios' },
+          { id: 'incluido-title', label: 'Incluido' },
+          { id: 'rubros-title', label: 'Rubros' },
+          { id: 'proceso-title', label: 'Proceso' },
+          { id: 'estudio-title', label: 'Estudio' },
+          { id: 'faq-title', label: 'Preguntas' },
+          { id: 'cta-title', label: 'Contacto' },
+        ]}
+      />
       <JsonLd data={faqJsonLd()} />
     </>
   );

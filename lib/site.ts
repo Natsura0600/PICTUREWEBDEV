@@ -63,7 +63,7 @@ export const services: readonly Service[] = [
     id: 'mantenimiento',
     title: 'Mantenimiento y mejora',
     text: 'Hosting, seguridad, copias de respaldo, cambios del mes y soporte directo para que tu web siga sirviendo mientras crecés.',
-    items: ['Hosting y certificado SSL', 'Cambios incluidos en el abono', 'Soporte por WhatsApp'],
+    items: ['Hosting y certificado SSL', 'Cambios del mes incluidos', 'Soporte por WhatsApp'],
   },
 ];
 
@@ -165,7 +165,15 @@ export const faqs = [
     a: 'Una landing suele estar en una semana; una web con panel o un sistema de turnos, entre dos y tres semanas. Depende de que tengamos textos y fotos.',
   },
   {
-    q: '¿Qué incluye el abono mensual?',
+    q: '¿Cuánto cuesta?',
+    a: 'Depende de lo que necesites: no es lo mismo una landing que un sistema de turnos. Contanos tu idea por WhatsApp o por el formulario y te pasamos un presupuesto por escrito, sin compromiso.',
+  },
+  {
+    q: '¿Qué necesito tener listo para empezar?',
+    a: 'Nada técnico. Alcanza con que nos cuentes qué hace tu negocio y a quién le vendés. Si tenés logo, fotos y textos, mejor; si no, te guiamos con qué hace falta.',
+  },
+  {
+    q: '¿Qué incluye el mantenimiento mensual?',
     a: 'Hosting, certificado de seguridad, copias de respaldo, mantenimiento técnico, cambios del mes y soporte directo por WhatsApp.',
   },
   {
@@ -173,8 +181,12 @@ export const faqs = [
     a: 'Sí, en los sitios con panel y en los sistemas a medida tenés un panel propio para cambiar textos, fotos, precios o turnos sin depender de nadie.',
   },
   {
-    q: '¿Cuánto cuesta?',
-    a: 'Depende de lo que necesites: no es lo mismo una landing que un sistema de turnos. Contanos tu idea por WhatsApp o por el formulario y te pasamos un presupuesto por escrito, sin compromiso.',
+    q: '¿El dominio está incluido?',
+    a: 'El dominio (por ejemplo, tunegocio.com.ar) queda a tu nombre y lo pagás directamente. Te guiamos para registrarlo y nos encargamos de configurarlo.',
+  },
+  {
+    q: '¿Qué pasa después de publicar?',
+    a: 'Quedamos a cargo: hosting, seguridad, copias de respaldo y los cambios del mes. Y si más adelante querés sumar algo nuevo, lo vemos juntos.',
   },
   {
     q: '¿Trabajan solo en Luján?',

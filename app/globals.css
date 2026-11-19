@@ -70,7 +70,7 @@
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: 7rem;
   }
   body {
     @apply bg-bg text-fg font-sans antialiased;
@@ -441,28 +441,6 @@
   animation: unclip 1ms linear 1.6s forwards;
 }
 
-/* Subrayado del menú que se dibuja de izquierda a derecha */
-.nav-link {
-  position: relative;
-}
-.nav-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -6px;
-  height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-.nav-link:hover::after,
-.nav-link[aria-current='page']::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
 /* Frase que se enciende palabra por palabra (ver ScrollText) */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
@@ -508,6 +486,141 @@
 .industry-row:hover::after,
 .industry-row:focus-visible::after {
   transform: scaleX(1);
+}
+
+/* ================= Navegación ================= */
+
+/* Desplazamiento suave al tocar enlaces internos (Next lo desactiva solo durante los cambios de página) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Píldora del menú que se desliza entre opciones */
+.nav-pill {
+  opacity: 0;
+  z-index: -1;
+  transition:
+    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    width 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.25s;
+}
+
+/* Encabezado: al bajar se compacta y el fondo se vuelve más sólido */
+.header-bar {
+  transition: height 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+header:has(.header-bar) {
+  transition:
+    background-color 0.4s,
+    box-shadow 0.4s;
+}
+html[data-scrolled] .header-bar {
+  height: 3.75rem;
+}
+html[data-scrolled] header:has(.header-bar) {
+  background-color: color-mix(in srgb, var(--bg) 94%, transparent);
+  box-shadow: 0 10px 30px -18px rgb(0 0 0 / 0.6);
+}
+
+/* Botón "volver arriba": entra deslizándose y su anillo se completa con el scroll */
+.to-top {
+  opacity: 0;
+  translate: 0 12px;
+  scale: 0.9;
+  pointer-events: none;
+  transition:
+    opacity 0.35s,
+    translate 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    scale 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.2s;
+}
+.to-top[data-show] {
+  opacity: 1;
+  translate: 0 0;
+  scale: 1;
+  pointer-events: auto;
+}
+.to-top:hover {
+  border-color: var(--accent);
+}
+.to-top:hover svg + svg {
+  translate: 0 -2px;
+}
+.to-top > svg + svg {
+  transition: translate 0.25s;
+}
+.to-top-ring {
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--p, 0));
+}
+
+/* Índice lateral del inicio */
+.section-index {
+  transition:
+    opacity 0.4s,
+    translate 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.section-index.is-hidden {
+  opacity: 0;
+  translate: 12px 0;
+  pointer-events: none;
+}
+.section-index-label {
+  opacity: 0;
+  translate: 8px 0;
+  transition:
+    opacity 0.25s,
+    translate 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.section-index a:hover .section-index-label,
+.section-index a:focus-visible .section-index-label {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* Menú del celular: el fondo aparece, el panel entra desde la derecha y los links llegan escalonados */
+@keyframes sheet-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes sheet-in {
+  from {
+    transform: translateX(100%);
+  }
+}
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+}
+[data-sheet-overlay][data-state='open'] {
+  animation: sheet-fade 0.3s ease-out both;
+}
+[data-sheet-content][data-state='open'] {
+  animation: sheet-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+[data-sheet-content][data-state='open'] nav li,
+[data-sheet-content][data-state='open'] .menu-actions > * {
+  animation: menu-item-in 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+[data-sheet-content] nav li:nth-child(1) {
+  animation-delay: 0.12s;
+}
+[data-sheet-content] nav li:nth-child(2) {
+  animation-delay: 0.17s;
+}
+[data-sheet-content] nav li:nth-child(3) {
+  animation-delay: 0.22s;
+}
+[data-sheet-content] nav li:nth-child(4) {
+  animation-delay: 0.27s;
+}
+[data-sheet-content] .menu-actions > * {
+  animation-delay: 0.34s;
 }
 
 /* Preguntas frecuentes: se abren con una transición de altura donde el navegador lo permite */

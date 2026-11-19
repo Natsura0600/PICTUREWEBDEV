@@ -6,6 +6,7 @@ import type { ReactNode } from 'react';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { PointerFx } from '@/components/motion/PointerFx';
+import { ScrollUi } from '@/components/layout/ScrollUi';
 import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
 import { Providers } from '@/components/providers';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -65,7 +66,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="es-AR" className={openSans.variable} suppressHydrationWarning>
+    <html lang="es-AR" className={openSans.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
         <a
           href="#contenido"
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           </main>
           <Footer />
           <WhatsAppFloat />
+          <ScrollUi />
           <PointerFx />
         </Providers>
         <JsonLd data={organizationJsonLd()} />

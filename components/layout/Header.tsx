@@ -10,13 +10,13 @@ import { ThemeToggle } from './ThemeToggle';
 export function Header() {
   return (
     <header className="border-line bg-bg/90 supports-[backdrop-filter]:bg-bg/75 sticky top-0 z-40 border-b backdrop-blur-md">
-      <div className="wrap flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
+      <div className="header-bar wrap flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
         <Link href="/" className="flex items-center gap-3" aria-label="Picture Web Dev, inicio">
           <Star className="size-8" />
           <Wordmark />
         </Link>
         <nav aria-label="Principal" className="hidden md:block">
-          <NavLinks className="flex items-center gap-8 text-sm font-semibold" />
+          <NavLinks indicator className="flex items-center gap-1 text-sm font-semibold" />
         </nav>
         <div className="flex items-center gap-2">
           <ThemeToggle className="hidden md:inline-flex" />
