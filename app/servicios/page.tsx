@@ -1,5 +1,6 @@
 import { ContactCTA } from '@/components/sections/ContactCTA';
 import { Faq } from '@/components/sections/Faq';
+import { Included } from '@/components/sections/Included';
 import { Process } from '@/components/sections/Process';
 import { SectionHeading } from '@/components/sections/SectionHeading';
 import { Services } from '@/components/sections/Services';
@@ -32,6 +33,7 @@ export default function ServicesPage() {
       <div className="mt-16 md:mt-20">
         <Services withHeading={false} />
       </div>
+      <Included kicker="Incluido" />
       <Process kicker="Proceso" />
       <Faq />
       <ContactCTA />

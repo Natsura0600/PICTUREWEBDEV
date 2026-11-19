@@ -17,10 +17,9 @@ export function ProjectCard({ project, index, priority, headingLevel: H = 'h3' }
       <Link
         href={`/proyectos/${slug}`}
         className="block focus-visible:outline-offset-4"
-        data-cursor="Ver caso"
         aria-label={`${meta.title}: ver caso`}
       >
-        <div data-tilt="5" className="tilt rounded-marca">
+        <div className="rounded-marca">
           <ProjectShot
             title={meta.title}
             host={hostOf(meta.url)}

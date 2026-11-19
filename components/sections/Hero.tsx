@@ -71,7 +71,7 @@ export function Hero({ projectCount }: { projectCount: number }) {
               perder menos tiempo. Desde Luján, para todo el país.
             </p>
             <div className="fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-10" style={i(3)}>
-              <Button asChild data-magnetic="0.25" className="magnetic">
+              <Button asChild>
                 <a
                   href={whatsappUrl('Hola, quiero una página web para mi negocio')}
                   target="_blank"
@@ -80,12 +80,7 @@ export function Hero({ projectCount }: { projectCount: number }) {
                   <MessageCircle aria-hidden="true" /> Escribinos por WhatsApp
                 </a>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                data-magnetic="0.25"
-                className="magnetic bg-bg/60 backdrop-blur-sm"
-              >
+              <Button asChild variant="outline" className="bg-bg/60 backdrop-blur-sm">
                 <a href={site.formUrl} target="_blank" rel="noopener noreferrer">
                   <FileText aria-hidden="true" /> Completá el formulario
                 </a>

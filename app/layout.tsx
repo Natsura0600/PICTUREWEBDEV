@@ -5,7 +5,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { ReactNode } from 'react';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
-import { CustomCursor } from '@/components/motion/CustomCursor';
 import { PointerFx } from '@/components/motion/PointerFx';
 import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat';
 import { Providers } from '@/components/providers';
@@ -86,7 +85,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer />
           <WhatsAppFloat />
           <PointerFx />
-          <CustomCursor />
         </Providers>
         <JsonLd data={organizationJsonLd()} />
         {/* Solo en Vercel: fuera de ahí los scripts no existen y darían errores en la consola */}

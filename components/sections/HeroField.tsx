@@ -2,16 +2,17 @@
 
 import { useEffect, useRef } from 'react';
 
-type Dot = { x: number; y: number; ox: number; oy: number; vx: number; vy: number; seed: number };
+type Dot = { x: number; y: number; ox: number; oy: number; vx: number; vy: number };
 
 const SPACING = 34;
-const RADIUS = 150;
+const RADIUS = 120;
 
 /**
- * Fondo interactivo del hero: una grilla de puntos que respira y se aparta del cursor (o del dedo).
+ * Fondo interactivo del hero: una grilla de puntos quieta que se aparta suavemente del cursor (o del dedo).
  * Los puntos cerca del puntero se encienden en amarillo y se unen con líneas finas.
  *
- * - Canvas 2D sin librerías. Se pausa fuera de pantalla y con la pestaña oculta.
+ * - Canvas 2D sin librerías. Solo anima mientras el puntero está encima y hasta que los puntos se acomodan;
+ *   el resto del tiempo no consume nada. Se pausa fuera de pantalla y con la pestaña oculta.
  * - Con "reducir movimiento" dibuja la grilla una vez y queda quieta.
  * - Decorativo: aria-hidden y pointer-events none (escucha el puntero en la sección padre).
  */
@@ -31,7 +32,6 @@ export function HeroField() {
     let dpr = 1;
     let raf = 0;
     let visible = true;
-    let t = 0;
     const pointer = { x: -9999, y: -9999, active: false, power: 0 };
     let fg = '231,227,221';
     let accent = '255,194,26';
@@ -61,25 +61,26 @@ export function HeroField() {
       const step = w < 640 ? SPACING * 0.85 : SPACING;
       for (let y = step / 2; y < h; y += step) {
         for (let x = step / 2; x < w; x += step) {
-          dots.push({ x, y, ox: x, oy: y, vx: 0, vy: 0, seed: Math.random() * Math.PI * 2 });
+          dots.push({ x, y, ox: x, oy: y, vx: 0, vy: 0 });
         }
       }
     };
 
-    const draw = () => {
+    /** Dibuja un cuadro y devuelve si todavía hay movimiento. */
+    const draw = (): boolean => {
       ctx.clearRect(0, 0, w, h);
+      let moving = false;
       pointer.power += ((pointer.active ? 1 : 0) - pointer.power) * 0.08;
       const near: Dot[] = [];
 
       for (const d of dots) {
-        // Respiración suave de la grilla
-        const bx = d.ox + Math.sin(t * 0.0009 + d.seed) * 2.2;
-        const by = d.oy + Math.cos(t * 0.0011 + d.seed) * 2.2;
+        const bx = d.ox;
+        const by = d.oy;
         const dx = d.x - pointer.x;
         const dy = d.y - pointer.y;
         const dist = Math.hypot(dx, dy);
         if (dist < RADIUS && pointer.power > 0.01) {
-          const f = (1 - dist / RADIUS) ** 2 * 7 * pointer.power;
+          const f = (1 - dist / RADIUS) ** 2 * 3.5 * pointer.power;
           d.vx += (dx / (dist || 1)) * f;
           d.vy += (dy / (dist || 1)) * f;
         }
@@ -90,6 +91,7 @@ export function HeroField() {
         d.vy *= 0.82;
         d.x += d.vx;
         d.y += d.vy;
+        if (Math.abs(d.vx) + Math.abs(d.vy) > 0.02) moving = true;
 
         const glow = dist < RADIUS ? (1 - dist / RADIUS) * pointer.power : 0;
         if (glow > 0.15) near.push(d);
@@ -107,7 +109,7 @@ export function HeroField() {
           const b = near[j]!;
           const dd = Math.hypot(a.x - b.x, a.y - b.y);
           if (dd < SPACING * 1.6) {
-            ctx.strokeStyle = `rgba(${accent},${(1 - dd / (SPACING * 1.6)) * 0.45 * pointer.power})`;
+            ctx.strokeStyle = `rgba(${accent},${(1 - dd / (SPACING * 1.6)) * 0.3 * pointer.power})`;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
             ctx.lineTo(b.x, b.y);
@@ -115,12 +117,12 @@ export function HeroField() {
           }
         }
       }
+      return moving || pointer.active || pointer.power > 0.01;
     };
 
-    const loop = (now: number) => {
-      t = now;
-      draw();
-      raf = visible && !document.hidden ? requestAnimationFrame(loop) : 0;
+    const loop = () => {
+      const keepGoing = draw();
+      raf = keepGoing && visible && !document.hidden ? requestAnimationFrame(loop) : 0;
     };
     const start = () => {
       if (!raf && !reduce && visible && !document.hidden) raf = requestAnimationFrame(loop);
@@ -131,15 +133,16 @@ export function HeroField() {
       pointer.x = e.clientX - r.left;
       pointer.y = e.clientY - r.top;
       pointer.active = true;
+      start();
     };
     const onLeave = () => {
       pointer.active = false;
+      start();
     };
 
     readColors();
     build();
     draw();
-    start();
 
     const ro = new ResizeObserver(() => {
       build();
@@ -153,7 +156,7 @@ export function HeroField() {
     io.observe(host);
     const mo = new MutationObserver(() => {
       readColors();
-      if (reduce) draw();
+      draw();
     });
     mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
     const onVis = () => start();

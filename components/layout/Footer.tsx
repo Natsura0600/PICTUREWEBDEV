@@ -8,7 +8,10 @@ export function Footer() {
   return (
     <footer className="border-line overflow-hidden border-t">
       <div className="wrap pt-14 md:pt-20">
-        <p aria-hidden="true" className="footer-giant text-[clamp(2.6rem,10.4vw,9.5rem)] leading-[0.9] font-extrabold tracking-[-0.06em] whitespace-nowrap">
+        <p
+          aria-hidden="true"
+          className="footer-giant text-[clamp(2.6rem,10.4vw,9.5rem)] leading-[0.9] font-extrabold tracking-[-0.06em] whitespace-nowrap"
+        >
           <SplitLetters text="Picture Web Dev" />
           <span aria-hidden="true" className="text-accent-ink">
             .

@@ -4,6 +4,8 @@ import { Faq } from '@/components/sections/Faq';
 import { FeaturedProjects } from '@/components/sections/FeaturedProjects';
 import { Hero } from '@/components/sections/Hero';
 import { Marquee } from '@/components/sections/Marquee';
+import { Included } from '@/components/sections/Included';
+import { Industries } from '@/components/sections/Industries';
 import { Statement } from '@/components/sections/Statement';
 import { Process } from '@/components/sections/Process';
 import { Services } from '@/components/sections/Services';
@@ -22,7 +24,9 @@ export default async function HomePage() {
       </div>
       <FeaturedProjects projects={projects} />
       <Services />
+      <Included />
       <Statement />
+      <Industries />
       <Process />
       <About />
       <Testimonials />

@@ -1,5 +1,4 @@
 import { Star } from '@/components/brand/Star';
-import { ScrollVelocity } from '@/components/motion/ScrollVelocity';
 
 const ITEMS = [
   'Páginas web',
@@ -28,19 +27,9 @@ export function Marquee() {
   );
   return (
     <section aria-label="Servicios" className="marquee py-4 md:py-6">
-      <ScrollVelocity />
-      <div className="bg-accent text-on-accent relative z-10 -rotate-[1.5deg] overflow-hidden py-4 md:py-5">
+      <div className="bg-accent text-on-accent -rotate-1 overflow-hidden py-4 md:py-5">
         <div className="marquee-track">
           {row(false)}
-          {row(true)}
-        </div>
-      </div>
-      <div
-        aria-hidden="true"
-        className="bg-surface text-fg border-line -mt-3 rotate-[1deg] overflow-hidden border-y py-3 md:-mt-4 md:py-4"
-      >
-        <div className="marquee-track marquee-track--reverse">
-          {row(true)}
           {row(true)}
         </div>
       </div>

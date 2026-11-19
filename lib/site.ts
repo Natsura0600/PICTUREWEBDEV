@@ -67,6 +67,62 @@ export const services: readonly Service[] = [
   },
 ];
 
+/** "Incluido en cada proyecto". icon: nombre del ícono de lucide-react (ver components/sections/Included). */
+export const included = [
+  {
+    icon: 'palette',
+    title: 'Diseño a medida',
+    text: 'Pensado para tu marca y tus clientes. Nada de plantillas genéricas.',
+  },
+  {
+    icon: 'smartphone',
+    title: 'Primero el celular',
+    text: 'La mayoría de tus clientes te va a ver desde el teléfono, así que arrancamos por ahí.',
+  },
+  {
+    icon: 'zap',
+    title: 'Carga rápida',
+    text: 'Páginas livianas que abren al toque, incluso con datos móviles.',
+  },
+  {
+    icon: 'search',
+    title: 'Lista para Google',
+    text: 'SEO técnico de base para que te encuentren cuando buscan lo que hacés.',
+  },
+  {
+    icon: 'message',
+    title: 'WhatsApp y formulario',
+    text: 'Cada visita está a un toque de escribirte. Ahí se convierten en clientes.',
+  },
+  {
+    icon: 'dashboard',
+    title: 'Panel para editar',
+    text: 'Si lo necesitás, cambiás textos, fotos o turnos vos mismo, sin depender de nadie.',
+  },
+  {
+    icon: 'shield',
+    title: 'Hosting y seguridad',
+    text: 'Certificado SSL, copias de respaldo y la web siempre online.',
+  },
+  {
+    icon: 'headset',
+    title: 'Soporte directo',
+    text: 'Hablás con quien construyó tu web, por WhatsApp, sin tickets ni esperas.',
+  },
+] as const;
+
+/** Rubros con los que trabajamos. slug: caso de estudio relacionado (si existe). */
+export const industries = [
+  { name: 'Barberías y peluquerías', detail: 'Turnos online y servicios', slug: 'keenas-barberia' },
+  { name: 'Complejos deportivos', detail: 'Reservas de canchas 24 h', slug: 'cornerapp' },
+  { name: 'Inmobiliarias y desarrollos', detail: 'Unidades, fotos y consultas', slug: 'quinzo-1' },
+  { name: 'Institutos y educación', detail: 'Cursos, niveles e inscripciones', slug: 'castleton-english' },
+  { name: 'Clubes y entretenimiento', detail: 'Contenido, juegos y comunidad', slug: 'drop-rugby' },
+  { name: 'Gastronomía', detail: 'Menú, pedidos y reservas' },
+  { name: 'Salud y estética', detail: 'Turnos y presentación de servicios' },
+  { name: 'Comercios y profesionales', detail: 'Catálogo, servicios y contacto' },
+] as const satisfies ReadonlyArray<{ name: string; detail: string; slug?: string }>;
+
 export type Step = { title: string; text: string };
 
 export const steps: readonly Step[] = [

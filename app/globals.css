@@ -235,7 +235,7 @@
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 38s linear infinite;
+  animation: marquee 55s linear infinite;
 }
 .marquee:hover .marquee-track {
   animation-play-state: paused;
@@ -360,12 +360,6 @@
 
 /* ================= Interacción (ver components/motion/PointerFx) ================= */
 
-/* Cinta de abajo: va en sentido contrario */
-.marquee-track--reverse {
-  animation-direction: reverse;
-  animation-duration: 52s;
-}
-
 /* Fondo de partículas del hero: aparece suave cuando carga */
 @keyframes fade-in {
   from {
@@ -388,49 +382,6 @@
 }
 .pulse-dot {
   animation: pulse-dot 2.2s ease-out infinite;
-}
-
-/* Botones magnéticos: siguen un poco al cursor */
-.fx-pointer .magnetic {
-  transform: translate(var(--tx, 0px), var(--ty, 0px));
-  transition:
-    transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
-    background-color 0.2s,
-    color 0.2s,
-    border-color 0.2s,
-    box-shadow 0.2s,
-    opacity 0.2s;
-}
-
-/* Tarjetas que se inclinan en 3D hacia el cursor, con un reflejo de luz */
-.tilt {
-  position: relative;
-}
-.fx-pointer .tilt {
-  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-  will-change: transform;
-}
-.fx-pointer .tilt[data-active] {
-  transition: transform 0.12s linear;
-}
-.fx-pointer .tilt::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  border-radius: inherit;
-  background: radial-gradient(
-    circle at var(--gx, 50%) var(--gy, 50%),
-    rgb(255 255 255 / 0.14),
-    transparent 55%
-  );
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.fx-pointer .tilt[data-active]::after {
-  opacity: 1;
 }
 
 /* Foco de luz amarillo que sigue al cursor dentro de la tarjeta */
@@ -468,7 +419,7 @@
     color 0.3s;
 }
 .fx-pointer .letter:hover {
-  transform: translateY(-0.14em) rotate(-6deg);
+  transform: translateY(-0.1em) rotate(-3deg);
   color: var(--accent-ink);
   transition-duration: 0.18s;
 }
@@ -477,7 +428,7 @@
 }
 .fx-pointer .letter:hover + .letter,
 .fx-pointer .letter:has(+ .letter:hover) {
-  transform: translateY(-0.06em) rotate(-2deg);
+  transform: translateY(-0.04em);
 }
 
 /* El título del hero entra con máscara; al terminar, la máscara se abre para que las letras puedan saltar */
@@ -488,11 +439,6 @@
 }
 .line-mask {
   animation: unclip 1ms linear 1.6s forwards;
-}
-
-/* Logo gigante del pie: sube letra por letra al aparecer */
-.footer-giant .letter {
-  transform-origin: bottom;
 }
 
 /* Subrayado del menú que se dibuja de izquierda a derecha */
@@ -517,93 +463,6 @@
   transform-origin: left;
 }
 
-/* Cursor de marca (ver CustomCursor) */
-.cursor-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.has-cursor .cursor-layer {
-  opacity: 1;
-}
-.cursor-ring,
-.cursor-dot {
-  position: absolute;
-  top: 0;
-  left: 0;
-  will-change: transform;
-}
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
-  border-radius: 999px;
-  background: var(--accent);
-}
-.cursor-ring {
-  display: grid;
-  place-items: center;
-}
-.cursor-ring::before {
-  content: '';
-  grid-area: 1 / 1;
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  border: 1.5px solid color-mix(in srgb, var(--fg) 45%, transparent);
-  translate: -50% -50%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition:
-    width 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
-    height 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
-    background-color 0.3s,
-    border-color 0.3s;
-}
-.cursor-ring[data-state='hover']::before {
-  width: 56px;
-  height: 56px;
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 12%, transparent);
-}
-.cursor-ring[data-state='label']::before {
-  width: 96px;
-  height: 96px;
-  border-color: var(--accent);
-  background: var(--accent);
-}
-.cursor-ring[data-down]::before {
-  width: 26px;
-  height: 26px;
-}
-.cursor-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  translate: -50% -50%;
-  white-space: nowrap;
-  font-size: 0.8125rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  color: var(--on-accent);
-  opacity: 0;
-  scale: 0.6;
-  transition:
-    opacity 0.25s,
-    scale 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.3);
-}
-.cursor-ring[data-state='label'] .cursor-label {
-  opacity: 1;
-  scale: 1;
-}
-.has-cursor .cursor-ring[data-state='label'] ~ .cursor-dot {
-  opacity: 0;
-}
-
 /* Frase que se enciende palabra por palabra (ver ScrollText) */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
@@ -622,26 +481,33 @@
       animation-timeline: view();
       animation-range: cover 18% cover 42%;
     }
-
-    @keyframes letter-rise {
-      from {
-        translate: 0 60%;
-        rotate: 8deg;
-        opacity: 0;
-      }
-    }
-    .footer-giant .letter {
-      animation: letter-rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 100%;
-    }
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .cursor-layer {
-    display: none;
-  }
+/* Filas de rubros: al pasar el mouse el nombre se corre un poco y una línea amarilla aparece abajo */
+.industry-row {
+  position: relative;
+  transition: padding-left 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.industry-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.industry-row:hover,
+.industry-row:focus-visible {
+  padding-left: 0.75rem;
+}
+.industry-row:hover::after,
+.industry-row:focus-visible::after {
+  transform: scaleX(1);
 }
 
 /* Preguntas frecuentes: se abren con una transición de altura donde el navegador lo permite */
