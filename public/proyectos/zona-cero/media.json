@@ -1,0 +1,20 @@
+{
+  "images": [
+    {
+      "src": "/proyectos/zona-cero/desktop.webp",
+      "width": 1600,
+      "height": 1000,
+      "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAAAQAgCdASoQAAoAA4BaJZwAD4eQcFi6k9QAAP7uPLeMXxwA4bxNbNF/hoX9vBfORLvYANxzONIBAaM7sjL397WoXyA0oAAA",
+      "device": "desktop",
+      "alt": "Zona Cero: vista en computadora"
+    },
+    {
+      "src": "/proyectos/zona-cero/mobile.webp",
+      "width": 780,
+      "height": 1688,
+      "blur": "data:image/webp;base64,UklGRrYAAABXRUJQVlA4IKoAAACwBACdASoQACMAPulip02pJaOiNVgIASAdCWUAx+WL9JPUzhUkK2Wmp2AjmXecAP55P0gpfymJ+LciXupr/KeEAI5fPvNv2CQ3aSqy7sc4ZVujT73TtW1u+dYnQz7iaP5D/lFgOb1+nq3Y9Fi21vxpeuytmnRI+1dZ8Y0CmvFLAY9v9r0NlKz+B79Jk+3JAOS9PPP+3cCBsrXBpH3wwhGOlDTLu8I4adAAAA==",
+      "device": "mobile",
+      "alt": "Zona Cero: vista en celular"
+    }
+  ]
+}

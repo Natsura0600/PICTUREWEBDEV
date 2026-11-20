@@ -1,0 +1,20 @@
+{
+  "images": [
+    {
+      "src": "/proyectos/castleton-english/desktop.webp",
+      "width": 1600,
+      "height": 1000,
+      "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAoAA4BaJZQC7AEPDwJaNwAA/vI9R67/5j2ST/VXPi9pBjLXVUd3uh9LtpLtc4j/olLXOehnZL04RpuSNWW1gAA=",
+      "device": "desktop",
+      "alt": "Castleton English: vista en computadora"
+    },
+    {
+      "src": "/proyectos/castleton-english/mobile.webp",
+      "width": 780,
+      "height": 1688,
+      "blur": "data:image/webp;base64,UklGRrAAAABXRUJQVlA4IKQAAAAwBACdASoQACMAPt1apE2opSOiNUgBEBuJYwAD5dK0pCAEl6gFBVD6ZAAA/pG/Zuw2ESxLwFA4QpumbTZBjeRg1IzXt+rZgAI/O/CezFPH0UfH+MqtCZyA2NKugCPC8/4AZV2U8zdAqs69V6/k+iLE2gPsNIKC4a7kuqpDRMrpxIu8iraO7CguLZgYxwTQHZ74FlzL1mZYi/k0/eDm7MKFngAAAA==",
+      "device": "mobile",
+      "alt": "Castleton English: vista en celular"
+    }
+  ]
+}

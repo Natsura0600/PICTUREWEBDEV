@@ -113,8 +113,8 @@ export const included = [
 
 /** Rubros con los que trabajamos. slug: caso de estudio relacionado (si existe). */
 export const industries = [
-  { name: 'Barberías y peluquerías', detail: 'Turnos online y servicios', slug: 'keenas-barberia' },
-  { name: 'Complejos deportivos', detail: 'Reservas de canchas 24 h', slug: 'cornerapp' },
+  { name: 'Barberías y peluquerías', detail: 'Turnos online y servicios', slug: 'zona-cero' },
+  { name: 'Complejos deportivos', detail: 'Reservas de canchas 24 h', slug: 'menotti' },
   { name: 'Inmobiliarias y desarrollos', detail: 'Unidades, fotos y consultas', slug: 'quinzo-1' },
   { name: 'Institutos y educación', detail: 'Cursos, niveles e inscripciones', slug: 'castleton-english' },
   { name: 'Clubes y entretenimiento', detail: 'Contenido, juegos y comunidad', slug: 'drop-rugby' },

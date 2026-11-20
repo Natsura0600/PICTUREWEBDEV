@@ -1,0 +1,37 @@
+export const meta = {
+  title: 'M10 Canchas de Fútbol',
+  client: 'M10 Menotti',
+  kind: 'Reserva de canchas',
+  year: 2026,
+  summary:
+    'Web y sistema de reservas para un complejo de fútbol 7, 9 y 11 en Luján: turnos online, panel con agenda y caja, y avisos al celular del dueño.',
+  url: 'https://menotti.vercel.app/',
+  stack: ['Next.js', 'Redis', 'Vercel'],
+  services: ['Diseño web', 'Sistema de reservas', 'Panel de gestión'],
+  order: 1,
+  featured: true,
+  results: [
+    'Los jugadores eligen cancha, día y horario y reservan solos, a cualquier hora',
+    'Un candado evita que dos personas reserven la misma cancha al mismo tiempo',
+    'El dueño recibe cada reserva como aviso en su celular',
+  ],
+};
+
+## El problema
+
+En un complejo de fútbol las reservas suelen pasar por WhatsApp o por teléfono: alguien tiene que contestar a cualquier hora, anotar en una planilla, cuidar que no se pisen los turnos y llevar aparte la caja de cada partido. M10 tiene cuatro canchas de distintos tamaños, así que el ida y vuelta era constante.
+
+## La solución
+
+Una web propia con la identidad del club y un sistema de reservas hecho a medida:
+
+- **Reserva online en un minuto**: el jugador elige cancha (fútbol 7, 9 u 11), día y horario libre, y recibe su comprobante.
+- **Panel del complejo** con la agenda del día, turnos fijos semanales y la caja de cada turno, con bebidas y pagos.
+- **Usuarios con roles**: el dueño ve todo y los empleados solo la agenda y la caja.
+- **Avisos al celular** cada vez que entra una reserva, sin instalar ninguna app.
+- **Todo editable sin tocar código**: textos, precios, canchas, horarios, fotos y logo.
+- **Sección de eventos y cumpleaños** con consulta directa por WhatsApp, ubicación y horarios.
+
+## El resultado
+
+Las reservas se toman solas, de día y de noche, y la agenda deja de depender de que alguien conteste. El complejo maneja turnos, fijos y caja desde el mismo panel, en el celular o en la computadora.

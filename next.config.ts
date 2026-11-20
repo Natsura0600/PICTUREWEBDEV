@@ -59,6 +59,13 @@ const nextConfig: NextConfig = {
       { source: '/api/(.*)', headers: [{ key: 'Cache-Control', value: 'no-store' }] },
     ];
   },
+  async redirects() {
+    // Casos que ya no están en el portfolio: los links viejos van al listado de proyectos
+    return [
+      { source: '/proyectos/cornerapp', destination: '/proyectos', permanent: true },
+      { source: '/proyectos/keenas-barberia', destination: '/proyectos', permanent: true },
+    ];
+  },
   async rewrites() {
     // El panel sigue siendo el HTML de siempre, servido en /admin
     return [{ source: '/admin', destination: '/admin.html' }];

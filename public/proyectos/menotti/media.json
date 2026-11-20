@@ -1,0 +1,20 @@
+{
+  "images": [
+    {
+      "src": "/proyectos/menotti/desktop.webp",
+      "width": 1600,
+      "height": 1000,
+      "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADwAQCdASoQAAoAA4BaJZQAApLEgFTMEmAA/veCWrCjmnP/PAnQ0MjNtZxvAqPUt8uDtsrQEVALvBcgAAA=",
+      "device": "desktop",
+      "alt": "M10 Canchas de Fútbol: vista en computadora"
+    },
+    {
+      "src": "/proyectos/menotti/mobile.webp",
+      "width": 780,
+      "height": 1688,
+      "blur": "data:image/webp;base64,UklGRtIAAABXRUJQVlA4IMYAAABwBQCdASoQACMAPt1cpU2opSOiNUgBEBuJQBjRv/xvAuBiUbNYcGFj6FQOadDGhmiEKA1gAP7yvsLVCxB852D8xkMWTvj/GI+sJwV/zgBmrQ1kSmpZdH9EziDHORKjnrmDgRIrA+XmxMaJk1kCOqoVBFP4RzkQMieqvbKxiUoRlagLr/eaXjX85k2JgRnBRqNGbZOt0PfoxjcvVDH25elviB1dEqkyRU+xSdp911N9wHLc3G4Z8H+ejujySOBJ4/7Qf44AAAA=",
+      "device": "mobile",
+      "alt": "M10 Canchas de Fútbol: vista en celular"
+    }
+  ]
+}

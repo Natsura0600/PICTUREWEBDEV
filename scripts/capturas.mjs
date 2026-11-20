@@ -4,7 +4,11 @@
  *
  * Uso:  npx playwright install chromium   (una sola vez)
  *       npm run capturas                  (todos)
- *       npm run capturas -- keenas-barberia   (uno solo)
+ *       npm run capturas -- zona-cero   (uno solo)
+ *
+ * Para que la captura no salga a medio cargar: recorre la página entera (dispara imágenes
+ * diferidas y animaciones al hacer scroll), espera fuentes e imágenes, y pide "reducir movimiento"
+ * para que las entradas animadas ya estén terminadas.
  */
 import { chromium } from '@playwright/test';
 import fs from 'node:fs/promises';
@@ -27,6 +31,38 @@ async function readMeta(file) {
   return { title: pick('title'), url: pick('url') };
 }
 
+/** Espera a que la página esté completa de verdad antes de sacar la foto. */
+async function settle(page) {
+  // Bajar hasta el final y volver: carga imágenes diferidas y dispara lo que aparece con el scroll
+  await page.evaluate(async () => {
+    const step = Math.max(300, Math.floor(window.innerHeight * 0.8));
+    for (let y = 0; y < document.documentElement.scrollHeight; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 120));
+    }
+    window.scrollTo(0, 0);
+  });
+  await page.waitForLoadState('networkidle').catch(() => {});
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    const imgs = Array.from(document.images).filter((img) => {
+      const r = img.getBoundingClientRect();
+      return r.bottom > 0 && r.top < window.innerHeight; // solo las que salen en la foto
+    });
+    await Promise.all(
+      imgs.map((img) =>
+        img.complete
+          ? img.decode?.().catch(() => {})
+          : new Promise((r) => {
+              img.addEventListener('load', r, { once: true });
+              img.addEventListener('error', r, { once: true });
+            }),
+      ),
+    );
+  });
+  await page.waitForTimeout(2000); // margen para fondos, videos y transiciones
+}
+
 async function blurOf(buffer) {
   const tiny = await sharp(buffer).resize(16).webp({ quality: 40 }).toBuffer();
   return `data:image/webp;base64,${tiny.toString('base64')}`;
@@ -39,7 +75,10 @@ async function main() {
   );
   if (!files.length) throw new Error(only ? `No existe content/proyectos/${only}.mdx` : 'No hay proyectos');
 
-  const browser = await chromium.launch();
+  // En entornos con Chromium preinstalado (CHROMIUM_PATH) se usa ese; si no, el de Playwright
+  const browser = await chromium.launch(
+    process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : undefined,
+  );
   try {
     for (const file of files) {
       const slug = file.replace(/\.mdx$/, '');
@@ -53,9 +92,15 @@ async function main() {
       const images = [];
 
       for (const d of DEVICES) {
-        const page = await browser.newPage({ viewport: d.viewport, deviceScaleFactor: d.scale });
+        const page = await browser.newPage({
+          viewport: d.viewport,
+          deviceScaleFactor: d.scale,
+          reducedMotion: 'reduce',
+          isMobile: d.device === 'mobile',
+          hasTouch: d.device === 'mobile',
+        });
         await page.goto(url, { waitUntil: 'networkidle', timeout: 60_000 });
-        await page.waitForTimeout(1500); // deja terminar animaciones de entrada
+        await settle(page);
         const png = await page.screenshot({ type: 'png' });
         await page.close();
 

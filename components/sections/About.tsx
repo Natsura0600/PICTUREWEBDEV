@@ -23,12 +23,11 @@ export function About({ kicker = '06 · El estudio', full = false }: { kicker?: 
             </p>
             <p>
               Diseño y programo cada proyecto de punta a punta, así que hablás siempre con quien lo construye.
-              También desarrollo{' '}
-              <Link href="/proyectos/cornerapp" className="text-fg underline underline-offset-3">
-                Córner
+              Por ejemplo, el sistema de reservas de{' '}
+              <Link href="/proyectos/menotti" className="text-fg underline underline-offset-3">
+                M10 Canchas de Fútbol
               </Link>
-              , un sistema de turnos para complejos deportivos: la misma base que uso para los sistemas a
-              medida.
+              : turnos online, agenda, caja y avisos al celular, todo en un mismo panel.
             </p>
             {full ? (
               <p>
