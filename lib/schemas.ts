@@ -50,6 +50,13 @@ export const projectMetaSchema = z.object({
   order: z.number().int(),
   featured: z.boolean().default(false),
   results: z.array(z.string()).default([]),
+  /** Portada: nombre corto para las pestañas, palabra gigante del slide y color pastel de fondo. */
+  short: z.string().min(1).max(14).optional(),
+  word: z.string().min(1).max(14).optional(),
+  color: z
+    .string()
+    .regex(/^#[0-9a-fA-F]{6}$/)
+    .optional(),
 });
 
 export type ProjectMeta = z.infer<typeof projectMetaSchema>;

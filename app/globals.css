@@ -52,7 +52,7 @@
   --color-negro: #0a0a0a;
   --color-hueso: #e7e3dd;
 
-  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --text-display: clamp(2.6rem, 7.2vw, 6.25rem);
   --text-display--line-height: 0.98;
@@ -360,16 +360,6 @@
 
 /* ================= Interacción (ver components/motion/PointerFx) ================= */
 
-/* Fondo de partículas del hero: aparece suave cuando carga */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-}
-.hero-field {
-  animation: fade-in 1.4s ease-out both;
-}
-
 /* Punto "en vivo" del kicker del hero */
 @keyframes pulse-dot {
   0% {
@@ -488,6 +478,456 @@
   transform: scaleX(1);
 }
 
+/* ================= Tonos pastel (mismos colores que la portada) ================= */
+
+/*
+ * Una sección envuelta en data-tone toma un fondo pastel y redefine los colores base:
+ * todos los componentes se adaptan solos. Texto oscuro sobre pastel para que se lea bien.
+ */
+[data-tone] {
+  --ink: #1d1726;
+  --fg: var(--ink);
+  --muted: color-mix(in srgb, var(--ink) 74%, var(--bg));
+  --line: color-mix(in srgb, var(--ink) 18%, var(--bg));
+  --surface: color-mix(in srgb, #fff 32%, var(--bg));
+  --accent: var(--ink);
+  --accent-ink: var(--ink);
+  --on-accent: #fff;
+  --ok: #14532d;
+  color-scheme: light;
+  background-color: var(--bg);
+  color: var(--fg);
+}
+[data-tone='lilac'] {
+  --bg: #c2b0dc;
+}
+[data-tone='mint'] {
+  --bg: #b4d58a;
+}
+[data-tone='butter'] {
+  --bg: #f3da8a;
+}
+[data-tone='pink'] {
+  --bg: #f2afc0;
+}
+[data-tone='sky'] {
+  --bg: #a9cbea;
+}
+/* En los tonos, las palabras destacadas llevan un marcador blanco en lugar del amarillo */
+[data-tone] .hl {
+  color: var(--ink);
+  background-image: linear-gradient(rgb(255 255 255 / 0.7), rgb(255 255 255 / 0.7));
+}
+[data-tone] ::selection {
+  background: var(--ink);
+  color: #fff;
+}
+[data-tone] .spot-card:hover {
+  background-color: color-mix(in srgb, #fff 22%, var(--bg));
+}
+.fx-pointer [data-tone] .spot-card::before {
+  background: radial-gradient(
+    22rem circle at var(--mx, 50%) var(--my, 50%),
+    rgb(255 255 255 / 0.4),
+    transparent 70%
+  );
+}
+/* Las secciones entonadas no necesitan la línea de arriba: el cambio de color ya las separa */
+[data-tone] > section {
+  border-top-color: transparent;
+}
+
+/* ================= Portada: slider de proyectos (ver HeroSlider) ================= */
+
+/*
+ * Todo lo de cada slide se dibuja en un lienzo de 1440 × 900 "px de diseño".
+ * --u = un px de diseño en px reales: entra entero en la pantalla (sin recortes).
+ * La interfaz (menú y controles) usa su propia unidad, --n, pegada a los bordes.
+ */
+.hs {
+  /* Sube debajo del encabezado fijo del sitio (que se esconde mientras la portada está en pantalla) */
+  margin-top: -4rem;
+  --u: min(calc(100vw / 1440), calc(100svh / 900));
+  --n: clamp(0.5px, min(calc(100vw / 1440), calc(100svh / 900)), 1.3px);
+  --fy: 0px;
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.6s;
+}
+@media (min-width: 768px) {
+  .hs {
+    margin-top: -4.5rem;
+  }
+}
+@media (max-width: 820px), (orientation: portrait) {
+  .hs {
+    --u: min(calc(100vw / 640), calc((100svh - 200px) / 620));
+    --n: 1px;
+    --fy: 8px;
+  }
+}
+.hs-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+.hs-slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.hs-slide[hidden] {
+  display: block;
+  visibility: hidden;
+}
+.hs-frame {
+  position: absolute;
+  width: calc(1440 * var(--u));
+  height: calc(900 * var(--u));
+  left: calc(50% - 720 * var(--u));
+  top: calc(50% - 450 * var(--u) + var(--fy));
+}
+.hs-layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+/* Palabra gigante, centrada sobre la misma línea de mayúsculas en todos los slides */
+.hs-word {
+  text-align: center;
+}
+.hs-word-text {
+  --fs: 445;
+  --top: 181;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--top) * var(--u));
+  font-size: calc(var(--fs) * var(--u));
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  letter-spacing: 0.005em;
+}
+.hs-sizing .hs-word-text {
+  opacity: 0;
+}
+
+/* Sombras de piso */
+.hs-floor,
+.hs-phone,
+.hs-piece {
+  position: absolute;
+  left: calc(var(--x) * var(--u));
+  top: calc(var(--y) * var(--u));
+  width: calc(var(--w) * var(--u));
+}
+.hs-floor {
+  height: calc(var(--h) * var(--u));
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(60 40 80 / 0.22), transparent);
+  filter: blur(calc(4 * var(--u)));
+}
+
+/* El "producto": un celular con la web del proyecto */
+.hs-phone {
+  height: calc(var(--h) * var(--u));
+  padding: calc(9 * var(--u));
+  border-radius: calc(46 * var(--u));
+  background: #14121a;
+  box-shadow:
+    inset 0 0 0 calc(2 * var(--u)) rgb(255 255 255 / 0.12),
+    0 calc(30 * var(--u)) calc(60 * var(--u)) calc(-20 * var(--u)) rgb(40 20 60 / 0.45);
+}
+.hs-phone::after {
+  content: '';
+  position: absolute;
+  top: calc(20 * var(--u));
+  left: 50%;
+  width: calc(78 * var(--u));
+  height: calc(22 * var(--u));
+  translate: -50% 0;
+  border-radius: 999px;
+  background: #14121a;
+}
+.hs-screen {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: calc(37 * var(--u));
+  background: #fff;
+}
+
+/* Piezas flotantes: el contenedor ubica, el interior flota (y lleva la rotación base) */
+.hs-bob {
+  animation: hs-bob var(--dur, 4s) ease-in-out var(--delay, 0s) infinite alternate;
+  transform: rotate(var(--rot, 0deg));
+}
+@keyframes hs-bob {
+  from {
+    transform: translateY(calc(-7 * var(--u))) rotate(calc(var(--rot, 0deg) - 3deg));
+  }
+  to {
+    transform: translateY(calc(7 * var(--u))) rotate(calc(var(--rot, 0deg) + 3deg));
+  }
+}
+.hs-shot {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: calc(14 * var(--u));
+  background: #fff;
+  box-shadow:
+    0 0 0 calc(4 * var(--u)) #fff,
+    0 calc(22 * var(--u)) calc(40 * var(--u)) calc(-16 * var(--u)) rgb(40 20 60 / 0.4);
+}
+.hs-star {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: #fff;
+  filter: drop-shadow(0 calc(10 * var(--u)) calc(14 * var(--u)) rgb(40 20 60 / 0.25));
+}
+.hs-piece--chip {
+  width: auto;
+}
+.hs-chip {
+  display: inline-block;
+  white-space: nowrap;
+  padding: calc(14 * var(--u)) calc(26 * var(--u));
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.94);
+  color: #1d1726;
+  font-size: calc(24 * var(--u));
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow: 0 calc(16 * var(--u)) calc(30 * var(--u)) calc(-14 * var(--u)) rgb(40 20 60 / 0.4);
+}
+.hs-corner .hs-piece {
+  filter: blur(calc(9 * var(--u)));
+}
+
+/* Interfaz */
+.hs-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  font-weight: 500;
+}
+.hs-ui a,
+.hs-ui button {
+  pointer-events: auto;
+  background: none;
+  border: 0;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+  text-shadow: 0 1px 6px rgb(90 70 40 / 0.18);
+}
+.hs-ui :focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+.hs-header {
+  position: absolute;
+  left: calc(50 * var(--n));
+  right: calc(50 * var(--n));
+  top: calc(26 * var(--n));
+  height: calc(50 * var(--n));
+  display: flex;
+  align-items: center;
+}
+.hs-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(12 * var(--n));
+}
+.hs-logo-star {
+  width: calc(44 * var(--n));
+  height: calc(44 * var(--n));
+  color: #fff;
+}
+.hs-logo .label-marca {
+  font-size: calc(17 * var(--n));
+}
+.hs-tabs {
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  gap: calc(56 * var(--n));
+  font-size: calc(21 * var(--n));
+  white-space: nowrap;
+}
+.hs-tabs button {
+  padding: calc(6 * var(--n)) 0;
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+.hs-tabs button[aria-current='true'],
+.hs-tabs button:hover {
+  opacity: 1;
+}
+.hs-bar {
+  position: absolute;
+  left: 0;
+  bottom: calc(-2 * var(--n));
+  height: 2px;
+  width: 0;
+  border-radius: 2px;
+  background: #fff;
+  transition:
+    transform 0.6s cubic-bezier(0.65, 0, 0.35, 1),
+    width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.hs-links {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: calc(22 * var(--n));
+  font-size: calc(21 * var(--n));
+  text-shadow: 0 1px 6px rgb(90 70 40 / 0.18);
+}
+.hs-cta {
+  position: absolute;
+  left: 50%;
+  bottom: calc(36 * var(--n));
+  translate: -50% 0;
+  padding: calc(10 * var(--n)) calc(16 * var(--n));
+  font-size: calc(21 * var(--n));
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.hs-arrow {
+  position: absolute;
+  bottom: calc(30 * var(--n));
+  width: calc(52 * var(--n));
+  height: calc(52 * var(--n));
+  display: grid;
+  place-items: center;
+}
+.hs-arrow--prev {
+  left: calc(36 * var(--n));
+}
+.hs-arrow--next {
+  right: calc(36 * var(--n));
+}
+.hs-arrow svg {
+  width: calc(28 * var(--n));
+  height: calc(28 * var(--n));
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: translate 0.3s;
+}
+.hs-arrow--prev:hover svg {
+  translate: -3px 0;
+}
+.hs-arrow--next:hover svg {
+  translate: 3px 0;
+}
+
+/* Antes de que arranque la secuencia de entrada (si el script no corre, a los 3,5 s se ve igual) */
+@keyframes hs-show {
+  to {
+    opacity: 1;
+  }
+}
+.hs-pre [data-rise] {
+  opacity: 0;
+  animation: hs-show 0.01s 3.5s forwards;
+}
+
+@media (max-width: 820px), (orientation: portrait) {
+  .hs-header {
+    left: 20px;
+    right: 20px;
+    top: 16px;
+    height: 40px;
+  }
+  .hs-logo-star {
+    width: 34px;
+    height: 34px;
+  }
+  .hs-logo .label-marca {
+    font-size: 13px;
+  }
+  .hs-links {
+    font-size: 15px;
+    gap: 10px;
+  }
+  .hs-tabs {
+    top: 52px;
+    gap: min(14px, 3.2vw);
+    font-size: min(14px, 3.6vw);
+  }
+  .hs-cta {
+    bottom: 22px;
+    font-size: 15px;
+  }
+  .hs-arrow {
+    bottom: 12px;
+    width: 48px;
+    height: 48px;
+  }
+  .hs-arrow svg {
+    width: 24px;
+    height: 24px;
+  }
+  .hs-arrow--prev {
+    left: 8px;
+  }
+  .hs-arrow--next {
+    right: 8px;
+  }
+}
+
+/* Mientras la portada está en pantalla, el encabezado del sitio y el botón flotante de WhatsApp se esconden */
+.site-header {
+  transition:
+    translate 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background-color 0.4s,
+    box-shadow 0.4s;
+}
+html[data-hero] .site-header {
+  translate: 0 -100%;
+}
+.wa-float {
+  transition:
+    opacity 0.35s,
+    translate 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.wa-float:hover {
+  translate: 0 -2px;
+}
+html[data-hero] .wa-float {
+  opacity: 0;
+  translate: 0 16px;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hs-bob {
+    animation: none !important;
+  }
+  .hs-bar {
+    transition: none;
+  }
+}
+
 /* ================= Navegación ================= */
 
 /* Desplazamiento suave al tocar enlaces internos (Next lo desactiva solo durante los cambios de página) */
@@ -511,11 +951,7 @@
 .header-bar {
   transition: height 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-header:has(.header-bar) {
-  transition:
-    background-color 0.4s,
-    box-shadow 0.4s;
-}
+
 html[data-scrolled] .header-bar {
   height: 3.75rem;
 }
@@ -675,8 +1111,7 @@ details[open]::details-content {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pulse-dot,
-  .hero-field {
+  .pulse-dot {
     animation: none !important;
   }
 }

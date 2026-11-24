@@ -14,14 +14,16 @@ import { organizationJsonLd } from '@/lib/seo';
 import { site } from '@/lib/site';
 import './globals.css';
 
-/** Open Sans autoalojada: sin pedidos a Google, sin saltos de diseño, y el build no depende de la red. */
-const openSans = localFont({
+/** Poppins autoalojada: sin pedidos a Google, sin saltos de diseño, y el build no depende de la red. */
+const poppins = localFont({
   src: [
-    { path: './fonts/open-sans-latin-400-normal.woff2', weight: '400', style: 'normal' },
-    { path: './fonts/open-sans-latin-700-normal.woff2', weight: '700', style: 'normal' },
-    { path: './fonts/open-sans-latin-800-normal.woff2', weight: '800', style: 'normal' },
+    { path: './fonts/poppins-latin-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/poppins-latin-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: './fonts/poppins-latin-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: './fonts/poppins-latin-700-normal.woff2', weight: '700', style: 'normal' },
+    { path: './fonts/poppins-latin-800-normal.woff2', weight: '800', style: 'normal' },
   ],
-  variable: '--font-open-sans',
+  variable: '--font-poppins',
   display: 'swap',
   fallback: ['ui-sans-serif', 'system-ui', 'Segoe UI', 'Arial'],
 });
@@ -66,7 +68,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="es-AR" className={openSans.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="es-AR" className={poppins.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>
         <a
           href="#contenido"
@@ -80,7 +82,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         <Providers>
           <Header />
-          <main id="contenido" tabIndex={-1} className="outline-none">
+          <main id="contenido" tabIndex={-1} className="pt-16 outline-none md:pt-[4.5rem]">
             {children}
           </main>
           <Footer />

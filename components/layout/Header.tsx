@@ -9,7 +9,7 @@ import { ThemeToggle } from './ThemeToggle';
 
 export function Header() {
   return (
-    <header className="border-line bg-bg/90 supports-[backdrop-filter]:bg-bg/75 sticky top-0 z-40 border-b backdrop-blur-md">
+    <header className="site-header border-line bg-bg/90 supports-[backdrop-filter]:bg-bg/75 fixed inset-x-0 top-0 z-40 border-b backdrop-blur-md">
       <div className="header-bar wrap flex h-16 items-center justify-between gap-4 md:h-[4.5rem]">
         <Link href="/" className="flex items-center gap-3" aria-label="Picture Web Dev, inicio">
           <Star className="size-8" />
