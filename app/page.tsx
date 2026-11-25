@@ -51,7 +51,6 @@ export default async function HomePage() {
         items={[
           { id: 'hero-title', label: 'Inicio' },
           { id: 'soluciones-title', label: 'Soluciones' },
-          { id: 'proyectos-title', label: 'Proyectos' },
           { id: 'estudio-title', label: 'Estudio' },
           { id: 'faq-title', label: 'Preguntas' },
         ]}
