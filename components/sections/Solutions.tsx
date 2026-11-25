@@ -32,8 +32,11 @@ function Instagram(props: ComponentProps<'svg'>) {
 export function Solutions({
   kicker = '01 · Soluciones',
   detailLink = true,
+  headingAs = 'h2',
 }: {
   kicker?: string;
+  /** En /servicios el panel es el título principal de la página. */
+  headingAs?: 'h1' | 'h2';
   /** En /servicios no hace falta el enlace "Ver detalle" (ya estás ahí). */
   detailLink?: boolean;
 }) {
@@ -47,6 +50,7 @@ export function Solutions({
         <SectionHeading
           id="soluciones-title"
           kicker={kicker}
+          as={headingAs}
           title={
             <>
               ¿Qué necesita <span className="hl">tu negocio?</span>
@@ -117,11 +121,7 @@ export function Solutions({
                     <Icon className="size-6" aria-hidden="true" />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-lg font-bold tracking-[-0.02em]">
-                      <a href={`/servicios#${a.id}`} className="hover:underline hover:underline-offset-4">
-                        {a.title}
-                      </a>
-                    </h3>
+                    <h3 className="text-lg font-bold tracking-[-0.02em]">{a.title}</h3>
                     <p className="text-muted mt-1 text-[0.9375rem]">{a.text}</p>
                   </div>
                   <Button

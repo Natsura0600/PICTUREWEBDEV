@@ -1,8 +1,6 @@
 import { Faq } from '@/components/sections/Faq';
 import { Included } from '@/components/sections/Included';
 import { Process } from '@/components/sections/Process';
-import { SectionHeading } from '@/components/sections/SectionHeading';
-import { Services } from '@/components/sections/Services';
 import { Solutions } from '@/components/sections/Solutions';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { breadcrumbJsonLd, faqJsonLd, pageMetadata } from '@/lib/seo';
@@ -17,23 +15,9 @@ export const metadata = pageMetadata({
 export default function ServicesPage() {
   return (
     <>
-      <section className="wrap pt-14 md:pt-20">
-        <SectionHeading
-          as="h1"
-          kicker="Servicios"
-          title={
-            <>
-              Todo lo que tu negocio necesita <span className="hl">para vender online.</span>
-            </>
-          }
-          lead="Desde una landing clara hasta un sistema de turnos con panel propio. Te decimos qué te conviene según tu negocio, aunque sea lo más simple."
-          className="mb-0 md:mb-0"
-        />
-      </section>
-      <div className="mt-16 md:mt-20">
-        <Solutions kicker="Elegí tu camino" detailLink={false} />
+      <div className="[&>section]:border-t-0 [&>section]:pt-14 md:[&>section]:pt-20">
+        <Solutions kicker="Servicios" headingAs="h1" detailLink={false} />
       </div>
-      <Services kicker="Todos los servicios" />
       <Included kicker="Incluido" />
       <Process kicker="Proceso" />
       <Faq />

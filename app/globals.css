@@ -803,6 +803,18 @@ html[data-slider] .wa-float {
   }
 }
 
+/* Las secciones a las que lleva el menú quedan justo debajo del encabezado fijo (compensa el scroll-padding de 7rem) */
+#soluciones,
+#estudio {
+  scroll-margin-top: -3rem;
+}
+@media (min-width: 768px) {
+  #soluciones,
+  #estudio {
+    scroll-margin-top: -2.5rem;
+  }
+}
+
 /* Píldora del menú que se desliza entre opciones */
 .nav-pill {
   opacity: 0;

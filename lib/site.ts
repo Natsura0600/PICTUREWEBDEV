@@ -29,64 +29,13 @@ export function whatsappUrl(text?: string): string {
   return text ? `${base}?text=${encodeURIComponent(text)}` : base;
 }
 
+/** Menú: Proyectos, Servicios y Estudio llevan a su sección del inicio; Contacto abre su página. */
 export const nav = [
   { href: '/#proyectos', label: 'Proyectos' },
-  { href: '/servicios', label: 'Servicios' },
-  { href: '/estudio', label: 'Estudio' },
+  { href: '/#soluciones', label: 'Servicios' },
+  { href: '/#estudio', label: 'Estudio' },
   { href: '/contacto', label: 'Contacto' },
 ] as const;
-
-export type Service = { id: string; title: string; text: string; items: readonly string[] };
-
-export const services: readonly Service[] = [
-  {
-    id: 'web',
-    title: 'Sitios web',
-    text: 'Landings y sitios institucionales que explican qué hacés en segundos y convierten visitas en consultas por WhatsApp o formulario.',
-    items: [
-      'Diseño a medida, no plantillas',
-      'Adaptado a celular desde el primer boceto',
-      'SEO técnico y carga rápida',
-    ],
-  },
-  {
-    id: 'sistemas',
-    title: 'Sistemas a medida',
-    text: 'Turnos online, pedidos, catálogos y paneles de administración pensados alrededor de cómo trabaja tu negocio.',
-    items: [
-      'Reservas 24 h sin atender el teléfono',
-      'Panel propio para editar sin depender de nadie',
-      'Varios profesionales, canchas o locales',
-    ],
-  },
-  {
-    id: 'agente-ia',
-    title: 'Agente de IA para WhatsApp',
-    text: 'Un asistente con inteligencia artificial que contesta los mensajes de tu negocio al instante, a cualquier hora, y te pasa los clientes listos para cerrar.',
-    items: [
-      'Responde consultas las 24 h, con el tono de tu marca',
-      'Toma los datos del interesado y te avisa del nuevo cliente',
-      'Te deriva la charla cuando hace falta una persona',
-      'También en los mensajes de Instagram',
-    ],
-  },
-  {
-    id: 'instagram',
-    title: 'Manejo de Instagram',
-    text: 'Tu cuenta activa y coherente con tu marca, para que quien te descubre en Instagram termine escribiéndote o visitando tu web.',
-    items: [
-      'Plan de contenido y diseño de publicaciones e historias',
-      'Perfil optimizado: bio, destacados y link a tu web',
-      'Mensajes respondidos a tiempo, con el agente de IA si querés',
-    ],
-  },
-  {
-    id: 'mantenimiento',
-    title: 'Mantenimiento y mejora',
-    text: 'Hosting, seguridad, copias de respaldo, cambios del mes y soporte directo para que tu web siga sirviendo mientras crecés.',
-    items: ['Hosting y certificado SSL', 'Cambios del mes incluidos', 'Soporte por WhatsApp'],
-  },
-];
 
 /** "Incluido en cada proyecto". icon: nombre del ícono de lucide-react (ver components/sections/Included). */
 export const included = [
