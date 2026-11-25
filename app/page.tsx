@@ -36,7 +36,6 @@ export default async function HomePage() {
       <SectionIndex
         items={[
           { id: 'hero-title', label: 'Inicio' },
-          { id: 'proyectos-title', label: 'Proyectos' },
           { id: 'servicios-title', label: 'Servicios' },
           { id: 'incluido-title', label: 'Incluido' },
           { id: 'rubros-title', label: 'Rubros' },
