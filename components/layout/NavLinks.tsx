@@ -69,7 +69,9 @@ export function NavLinks({ className, onNavigate, indicator = false }: Props) {
         />
       ) : null}
       {nav.map((item) => {
-        const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+        // "/#proyectos" es una sección del inicio, pero se marca activa dentro de los casos (/proyectos/...)
+        const base = item.href.replace('/#', '/');
+        const active = pathname === base || pathname.startsWith(`${base}/`);
         return (
           <li key={item.href} className={indicator ? 'relative' : undefined}>
             <Link

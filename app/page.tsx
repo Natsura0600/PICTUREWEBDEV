@@ -2,23 +2,20 @@ import { SectionIndex } from '@/components/layout/SectionIndex';
 import { About } from '@/components/sections/About';
 import { ContactCTA } from '@/components/sections/ContactCTA';
 import { Faq } from '@/components/sections/Faq';
-import { HeroSlider, type HeroSlide } from '@/components/sections/HeroSlider';
-import { Included } from '@/components/sections/Included';
-import { Industries } from '@/components/sections/Industries';
-import { Marquee } from '@/components/sections/Marquee';
+import { Hero } from '@/components/sections/Hero';
 import { Process } from '@/components/sections/Process';
-import { Services } from '@/components/sections/Services';
-import { Statement } from '@/components/sections/Statement';
+import { ProjectsSlider, type ProjectSlide } from '@/components/sections/ProjectsSlider';
+import { Solutions } from '@/components/sections/Solutions';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { getProjects, type Project } from '@/lib/projects';
 import { faqJsonLd } from '@/lib/seo';
 
-/** Colores de respaldo si un proyecto no define el suyo. */
-const PALETTE = ['#C2B0DC', '#B4D58A', '#F3DA8A', '#F2AFC0', '#A9CBEA'];
+/** Color de respaldo si un proyecto no define el suyo (el dorado de la marca). */
+const FALLBACK_COLOR = '#FFC21A';
 
-/** Solo entran a la portada los proyectos con capturas propias de celular y de compu. */
-function toSlide(p: Project, i: number): HeroSlide | null {
+/** Solo entran al slider los proyectos con capturas propias de celular y de compu. */
+function toSlide(p: Project): ProjectSlide | null {
   const mobile = p.images.find((img) => img.device === 'mobile');
   const desktop = p.images.find((img) => img.device === 'desktop');
   if (!mobile || !desktop) return null;
@@ -28,50 +25,37 @@ function toSlide(p: Project, i: number): HeroSlide | null {
     title: meta.title,
     short: meta.short ?? meta.title,
     word: meta.word ?? meta.title,
-    color: meta.color ?? PALETTE[i % PALETTE.length]!,
+    color: meta.color ?? FALLBACK_COLOR,
     chips: [meta.services[1] ?? meta.kind, meta.services[2] ?? meta.services[0] ?? meta.kind],
     mobile: { src: mobile.src, blur: mobile.blur },
     desktop: { src: desktop.src, blur: desktop.blur },
   };
 }
 
+/**
+ * Inicio, pensado para vender en pocos pasos:
+ * qué hacemos → qué necesita tu negocio (con su WhatsApp) → trabajos reales → cómo trabajamos →
+ * quién está detrás → dudas → contacto.
+ */
 export default async function HomePage() {
   const projects = await getProjects();
-  const slides = projects.map(toSlide).filter((s): s is HeroSlide => s !== null);
+  const slides = projects.map(toSlide).filter((s): s is ProjectSlide => s !== null);
 
   return (
     <>
-      <HeroSlider slides={slides} />
-      <div className="overflow-hidden">
-        <Marquee />
-      </div>
-      <div data-tone="lilac">
-        <Services kicker="01 · Servicios" />
-      </div>
-      <div data-tone="mint">
-        <Included kicker="02 · Incluido" />
-      </div>
-      <Statement />
-      <div data-tone="sky">
-        <Industries kicker="03 · Rubros" />
-      </div>
-      <div data-tone="pink">
-        <Process kicker="04 · Cómo trabajamos" />
-      </div>
-      <div data-tone="butter">
-        <About kicker="05 · El estudio" />
-      </div>
+      <Hero projectCount={projects.length} />
+      <Solutions />
+      <ProjectsSlider slides={slides} />
+      <Process kicker="03 · Cómo trabajamos" />
+      <About kicker="04 · El estudio" />
       <Testimonials />
-      <div data-tone="lilac">
-        <Faq />
-      </div>
+      <Faq />
       <ContactCTA />
       <SectionIndex
         items={[
           { id: 'hero-title', label: 'Inicio' },
-          { id: 'servicios-title', label: 'Servicios' },
-          { id: 'incluido-title', label: 'Incluido' },
-          { id: 'rubros-title', label: 'Rubros' },
+          { id: 'soluciones-title', label: 'Soluciones' },
+          { id: 'proyectos-title', label: 'Proyectos' },
           { id: 'proceso-title', label: 'Proceso' },
           { id: 'estudio-title', label: 'Estudio' },
           { id: 'faq-title', label: 'Preguntas' },

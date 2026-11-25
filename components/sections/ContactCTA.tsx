@@ -3,15 +3,11 @@ import { Star } from '@/components/brand/Star';
 import { Button } from '@/components/ui/button';
 import { site, whatsappUrl } from '@/lib/site';
 
-/** Banda de cierre en tono pastel: una sola acción principal. */
+/** Banda dorada de cierre: una sola acción principal. */
 export function ContactCTA() {
   return (
-    <section
-      aria-labelledby="cta-title"
-      data-tone="butter"
-      className="bg-bg text-fg relative overflow-hidden"
-    >
-      <Star className="text-fg spin-slow pointer-events-none absolute -right-16 -bottom-24 size-[22rem] opacity-[0.08] md:size-[30rem]" />
+    <section aria-labelledby="cta-title" className="bg-accent text-on-accent relative overflow-hidden">
+      <Star className="text-on-accent pointer-events-none absolute -right-16 -bottom-24 size-[22rem] opacity-[0.08] md:size-[30rem]" />
       <div className="wrap relative grid gap-8 py-20 md:grid-cols-[minmax(0,1.3fr)_minmax(0,.7fr)] md:items-end md:py-28">
         <div>
           <p className="kicker !text-current opacity-75">Hablemos</p>

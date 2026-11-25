@@ -30,7 +30,7 @@ export function whatsappUrl(text?: string): string {
 }
 
 export const nav = [
-  { href: '/proyectos', label: 'Proyectos' },
+  { href: '/#proyectos', label: 'Proyectos' },
   { href: '/servicios', label: 'Servicios' },
   { href: '/estudio', label: 'Estudio' },
   { href: '/contacto', label: 'Contacto' },
@@ -111,17 +111,79 @@ export const included = [
   },
 ] as const;
 
-/** Rubros con los que trabajamos. slug: caso de estudio relacionado (si existe). */
-export const industries = [
-  { name: 'Barberías y peluquerías', detail: 'Turnos online y servicios', slug: 'zona-cero' },
-  { name: 'Complejos deportivos', detail: 'Reservas de canchas 24 h', slug: 'menotti' },
-  { name: 'Inmobiliarias y desarrollos', detail: 'Unidades, fotos y consultas', slug: 'quinzo-1' },
-  { name: 'Institutos y educación', detail: 'Cursos, niveles e inscripciones', slug: 'castleton-english' },
-  { name: 'Clubes y entretenimiento', detail: 'Contenido, juegos y comunidad', slug: 'drop-rugby' },
-  { name: 'Gastronomía', detail: 'Menú, pedidos y reservas' },
-  { name: 'Salud y estética', detail: 'Turnos y presentación de servicios' },
-  { name: 'Comercios y profesionales', detail: 'Catálogo, servicios y contacto' },
-] as const satisfies ReadonlyArray<{ name: string; detail: string; slug?: string }>;
+/**
+ * Segmentos de la portada: cada tipo de cliente ve qué le resolvemos, qué incluye,
+ * un ejemplo real y un botón de WhatsApp con su propio mensaje.
+ */
+export type Segment = {
+  id: string;
+  tag: string;
+  title: string;
+  for: string;
+  items: readonly string[];
+  examples: readonly { label: string; slug: string }[];
+  cta: string;
+  message: string;
+};
+
+export const segments: readonly Segment[] = [
+  {
+    id: 'presencia',
+    tag: 'Web o landing',
+    title: 'Que te encuentren y te escriban',
+    for: 'Comercios, profesionales, institutos e inmobiliarias.',
+    items: [
+      'Diseño a medida, pensado primero para el celular',
+      'Lista para aparecer en Google',
+      'Botón de WhatsApp y formulario en cada página',
+    ],
+    examples: [
+      { label: 'Quinzo 1', slug: 'quinzo-1' },
+      { label: 'Castleton', slug: 'castleton-english' },
+    ],
+    cta: 'Quiero mi web',
+    message: 'Hola, quiero una página web para mi negocio',
+  },
+  {
+    id: 'turnos',
+    tag: 'Turnos y reservas',
+    title: 'Que te reserven solos, a cualquier hora',
+    for: 'Barberías, complejos deportivos, estética y consultorios.',
+    items: [
+      'Reservas online 24 h, sin atender el teléfono',
+      'Recordatorios por WhatsApp y avisos al celular',
+      'Panel para manejar agenda, servicios y caja',
+    ],
+    examples: [
+      { label: 'Zona Cero', slug: 'zona-cero' },
+      { label: 'M10 Canchas', slug: 'menotti' },
+    ],
+    cta: 'Quiero turnos online',
+    message: 'Hola, quiero un sistema de turnos online para mi negocio',
+  },
+  {
+    id: 'medida',
+    tag: 'Sistema a medida',
+    title: 'Una herramienta hecha para tu forma de trabajar',
+    for: 'Negocios con un proceso propio: pedidos, gestión o una idea nueva.',
+    items: [
+      'Panel de gestión con usuarios y permisos',
+      'Pedidos, catálogos, juegos o lo que tu idea necesite',
+      'Lo editás vos, sin depender de nadie',
+    ],
+    examples: [{ label: 'Drop Rugby', slug: 'drop-rugby' }],
+    cta: 'Contame tu idea',
+    message: 'Hola, tengo una idea para un sistema a medida',
+  },
+];
+
+/** Lo que trae cualquier proyecto (una sola línea en la portada; el detalle está en /servicios). */
+export const always = [
+  'Hosting y certificado SSL',
+  'Mantenimiento mensual',
+  'Cambios del mes incluidos',
+  'Soporte directo por WhatsApp',
+] as const;
 
 export type Step = { title: string; text: string };
 
@@ -161,32 +223,24 @@ export const testimonials: readonly Testimonial[] = [];
 
 export const faqs = [
   {
-    q: '¿Cuánto tarda en estar lista mi web?',
-    a: 'Una landing suele estar en una semana; una web con panel o un sistema de turnos, entre dos y tres semanas. Depende de que tengamos textos y fotos.',
-  },
-  {
     q: '¿Cuánto cuesta?',
     a: 'Depende de lo que necesites: no es lo mismo una landing que un sistema de turnos. Contanos tu idea por WhatsApp o por el formulario y te pasamos un presupuesto por escrito, sin compromiso.',
+  },
+  {
+    q: '¿Cuánto tarda en estar lista mi web?',
+    a: 'Una landing suele estar en una semana; una web con panel o un sistema de turnos, entre dos y tres semanas. Depende de que tengamos textos y fotos.',
   },
   {
     q: '¿Qué necesito tener listo para empezar?',
     a: 'Nada técnico. Alcanza con que nos cuentes qué hace tu negocio y a quién le vendés. Si tenés logo, fotos y textos, mejor; si no, te guiamos con qué hace falta.',
   },
   {
-    q: '¿Qué incluye el mantenimiento mensual?',
-    a: 'Hosting, certificado de seguridad, copias de respaldo, mantenimiento técnico, cambios del mes y soporte directo por WhatsApp.',
-  },
-  {
     q: '¿Puedo editar mi web yo mismo?',
     a: 'Sí, en los sitios con panel y en los sistemas a medida tenés un panel propio para cambiar textos, fotos, precios o turnos sin depender de nadie.',
   },
   {
-    q: '¿El dominio está incluido?',
-    a: 'El dominio (por ejemplo, tunegocio.com.ar) queda a tu nombre y lo pagás directamente. Te guiamos para registrarlo y nos encargamos de configurarlo.',
-  },
-  {
     q: '¿Qué pasa después de publicar?',
-    a: 'Quedamos a cargo: hosting, seguridad, copias de respaldo y los cambios del mes. Y si más adelante querés sumar algo nuevo, lo vemos juntos.',
+    a: 'Quedamos a cargo: hosting, seguridad, copias de respaldo y los cambios del mes. El dominio queda a tu nombre. Y si más adelante querés sumar algo nuevo, lo vemos juntos.',
   },
   {
     q: '¿Trabajan solo en Luján?',

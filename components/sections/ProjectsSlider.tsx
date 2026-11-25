@@ -4,11 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from 'react';
 import { Star } from '@/components/brand/Star';
-import { Wordmark } from '@/components/brand/Wordmark';
-import { site, whatsappUrl } from '@/lib/site';
 import { cn } from '@/lib/utils';
 
-export type HeroSlide = {
+export type ProjectSlide = {
   slug: string;
   title: string;
   short: string;
@@ -56,7 +54,7 @@ const PIECES: Piece[] = [
   { kind: 'shot', x: 1118, y: 410, w: 256, rot: 6, layer: 'fruit' },
   { kind: 'chip', x: 950, y: 606, w: 0, rot: 4, chip: 1, layer: 'fruit' },
   { kind: 'star', x: -46, y: 556, w: 300, rot: -12, layer: 'corner' },
-  { kind: 'shot', x: 1250, y: 6, w: 290, rot: 10, layer: 'corner' },
+  { kind: 'shot', x: 1262, y: 150, w: 280, rot: 10, layer: 'corner' },
 ];
 
 const LAYERS = ['word', 'shadow', 'bottle', 'fruit', 'corner'] as const;
@@ -114,12 +112,12 @@ const rand = (seed: number) => {
 const isMobileLayout = () => window.innerWidth <= 820 || window.innerHeight > window.innerWidth;
 
 /**
- * Portada: slider a pantalla completa, un slide por proyecto.
- * Cada slide pinta toda la pantalla con un color pastel; una palabra gigante va detrás del celular
+ * Sección Proyectos: slider a pantalla completa, un slide por proyecto, sobre el negro de la marca.
+ * Una palabra gigante en el color del proyecto va detrás del celular
  * con la web del proyecto, y alrededor flotan capturas, estrellas y etiquetas a distintas profundidades.
  * Al cambiar, el slide actual se cubre de derecha a izquierda y el nuevo entra con parallax.
  */
-export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
+export function ProjectsSlider({ slides }: { slides: ProjectSlide[] }) {
   const root = useRef<HTMLElement>(null);
   const [index, setIndex] = useState(0);
   const current = useRef(0);
@@ -257,10 +255,12 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       window.clearTimeout(failsafe);
     };
 
-    document.fonts.ready.then(() => {
-      if (cancelled) return;
-      sizeWords();
-      moveBar(current.current);
+    // La entrada se reproduce la primera vez que la sección aparece en pantalla (con las fuentes listas)
+    let fontsReady = false;
+    let played = false;
+    const intro = () => {
+      if (played || !fontsReady || !inView.current) return;
+      played = true;
       if (reduce.current) {
         reveal();
         return;
@@ -283,13 +283,20 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
             { opacity: 0, translate: '0 14px' },
             { opacity: 1, translate: '0 0' },
           ],
-          { duration: 1000, delay: Number(node.dataset.rise), easing: ease, fill: 'backwards' },
+          { duration: 1000, delay: Number(node.dataset.rise) - 200, easing: ease, fill: 'backwards' },
         );
       });
       reveal();
+      lastInteraction.current = performance.now() - IDLE_MS + 1500; // el autoplay arranca después de la entrada
+    };
+
+    document.fonts.ready.then(() => {
+      if (cancelled) return;
+      sizeWords();
+      moveBar(current.current);
+      fontsReady = true;
+      intro();
     });
-    // Si algo se demora, a los 3 s se muestra todo igual
-    failsafe = window.setTimeout(reveal, 3000);
 
     const onResize = () => {
       sizeWords();
@@ -297,11 +304,19 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
     };
     window.addEventListener('resize', onResize);
 
-    // La portada avisa cuándo está en pantalla: el encabezado del sitio se esconde mientras tanto
+    // En pantalla: corre el autoplay, responden las flechas del teclado y se esconde el botón flotante de WhatsApp
     const io = new IntersectionObserver(
       ([entry]) => {
         inView.current = !!entry?.isIntersecting && entry.intersectionRatio > 0.35;
-        document.documentElement.toggleAttribute('data-hero', inView.current);
+        document.documentElement.toggleAttribute(
+          'data-slider',
+          inView.current && entry!.intersectionRatio > 0.6,
+        );
+        if (inView.current) {
+          intro();
+          // Si algo se demora, a los 3 s se muestra todo igual
+          if (!played) failsafe = window.setTimeout(reveal, 3000);
+        }
       },
       { threshold: [0, 0.35, 0.6, 1] },
     );
@@ -334,7 +349,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       window.removeEventListener('resize', onResize);
       window.removeEventListener('keydown', onKey);
       io.disconnect();
-      document.documentElement.removeAttribute('data-hero');
+      document.documentElement.removeAttribute('data-slider');
     };
   }, [sizeWords, moveBar, next, prev]);
 
@@ -375,21 +390,16 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
     <section
       ref={root}
       aria-roledescription="carrusel"
-      aria-labelledby="hero-title"
+      id="proyectos"
+      aria-labelledby="proyectos-title"
       className="hs hs-pre hs-sizing"
-      style={{ backgroundColor: slides[0]?.color }}
     >
-      <h1 id="hero-title" className="sr-only">
-        {site.name}: páginas web, turnos online y sistemas a medida para negocios. Algunos de nuestros
-        proyectos:
-      </h1>
-
       <div className="hs-stage">
         {slides.map((s, i) => (
           <div
             key={s.slug}
             className="hs-slide"
-            style={{ backgroundColor: s.color, zIndex: i === 0 ? 2 : undefined }}
+            style={{ '--c': s.color, zIndex: i === 0 ? 2 : undefined } as CSSProperties}
             hidden={i !== 0}
             role="group"
             aria-roledescription="slide"
@@ -476,10 +486,9 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
       {/* Interfaz: arriba logo, proyectos y accesos; abajo "ver caso" y flechas */}
       <div className="hs-ui">
         <div className="hs-header">
-          <Link href="/" className="hs-logo" data-rise="250" aria-label={`${site.name}, inicio`}>
-            <Star className="hs-logo-star" />
-            <Wordmark />
-          </Link>
+          <h2 id="proyectos-title" className="hs-title" data-rise="250">
+            <span className="hs-title-num">02 ·</span> Proyectos
+          </h2>
           <div className="hs-tabs" data-rise="330" ref={tabsRef} role="group" aria-label="Proyectos">
             {slides.map((s, i) => (
               <button
@@ -497,17 +506,7 @@ export function HeroSlider({ slides }: { slides: HeroSlide[] }) {
             <span ref={bar} className="hs-bar" aria-hidden="true" />
           </div>
           <div className="hs-links" data-rise="410">
-            <Link href="/servicios">Servicios</Link>
-            <span aria-hidden="true" className="opacity-90">
-              |
-            </span>
-            <a
-              href={whatsappUrl('Hola, quiero una página web para mi negocio')}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              WhatsApp
-            </a>
+            <Link href="/proyectos">Ver todos</Link>
           </div>
         </div>
 
