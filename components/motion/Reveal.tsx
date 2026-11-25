@@ -6,6 +6,7 @@ type Props = {
   className?: string;
   delay?: number;
   as?: 'div' | 'li' | 'article';
+  id?: string;
 } & Record<`data-${string}`, string | boolean | undefined>;
 
 /**
@@ -14,10 +15,10 @@ type Props = {
  * - Nunca deja contenido oculto: si el navegador no la soporta, o si alguien salta con el scroll,
  *   el contenido ya está visible. Con "reducir movimiento" no anima.
  */
-export function Reveal({ children, className, delay = 0, as: Comp = 'div', ...data }: Props) {
+export function Reveal({ children, className, delay = 0, as: Comp = 'div', id, ...data }: Props) {
   const style = delay ? ({ '--reveal-delay': `${delay * 40}%` } as CSSProperties) : undefined;
   return (
-    <Comp className={cn('reveal', className)} style={style} {...data}>
+    <Comp id={id} className={cn('reveal', className)} style={style} {...data}>
       {children}
     </Comp>
   );

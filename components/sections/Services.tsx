@@ -28,14 +28,15 @@ export function Services({
             Servicios
           </h2>
         )}
-        <ul className="border-line grid border-t border-l md:grid-cols-3">
+        <ul className="border-line grid border-t border-l md:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => (
             <Reveal
               as="li"
               key={s.id}
+              id={s.id}
               data-spotlight
               delay={i * 0.06}
-              className="spot-card border-line flex min-w-0 flex-col border-r border-b p-6 md:p-8"
+              className="spot-card border-line flex min-w-0 scroll-mt-28 flex-col border-r border-b p-6 md:p-8"
             >
               <span className="label-marca text-muted">{String(i + 1).padStart(2, '0')}</span>
               <h3 className="mt-10 text-2xl font-bold tracking-[-0.025em] md:mt-14">{s.title}</h3>

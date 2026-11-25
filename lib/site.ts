@@ -60,6 +60,27 @@ export const services: readonly Service[] = [
     ],
   },
   {
+    id: 'agente-ia',
+    title: 'Agente de IA para WhatsApp',
+    text: 'Un asistente con inteligencia artificial que contesta los mensajes de tu negocio al instante, a cualquier hora, y te pasa los clientes listos para cerrar.',
+    items: [
+      'Responde consultas las 24 h, con el tono de tu marca',
+      'Toma los datos del interesado y te avisa del nuevo cliente',
+      'Te deriva la charla cuando hace falta una persona',
+      'También en los mensajes de Instagram',
+    ],
+  },
+  {
+    id: 'instagram',
+    title: 'Manejo de Instagram',
+    text: 'Tu cuenta activa y coherente con tu marca, para que quien te descubre en Instagram termine escribiéndote o visitando tu web.',
+    items: [
+      'Plan de contenido y diseño de publicaciones e historias',
+      'Perfil optimizado: bio, destacados y link a tu web',
+      'Mensajes respondidos a tiempo, con el agente de IA si querés',
+    ],
+  },
+  {
     id: 'mantenimiento',
     title: 'Mantenimiento y mejora',
     text: 'Hosting, seguridad, copias de respaldo, cambios del mes y soporte directo para que tu web siga sirviendo mientras crecés.',
@@ -176,6 +197,24 @@ export const segments: readonly Segment[] = [
     message: 'Hola, tengo una idea para un sistema a medida',
   },
 ];
+
+/** Servicios que se suman a cualquier negocio, con su propio WhatsApp (portada). */
+export const addons = [
+  {
+    id: 'agente-ia',
+    title: 'Agente de IA para WhatsApp',
+    text: 'Contesta tus mensajes al instante, las 24 h, y te avisa cuando entra un cliente.',
+    cta: 'Quiero mi agente',
+    message: 'Hola, quiero un agente de IA para el WhatsApp de mi negocio',
+  },
+  {
+    id: 'instagram',
+    title: 'Manejo de Instagram',
+    text: 'Contenido, diseño y un perfil que lleva a tus clientes a escribirte.',
+    cta: 'Quiero que manejen mi Instagram',
+    message: 'Hola, quiero que manejen el Instagram de mi negocio',
+  },
+] as const;
 
 /** Lo que trae cualquier proyecto (una sola línea en la portada; el detalle está en /servicios). */
 export const always = [

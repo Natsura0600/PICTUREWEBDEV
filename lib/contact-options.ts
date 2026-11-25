@@ -7,6 +7,8 @@ export const TIPOS = [
   'Sitio institucional',
   'Sistema a medida',
   'Tienda online',
+  'Agente de IA para WhatsApp',
+  'Manejo de Instagram',
   'Rediseño de un sitio existente',
   'Otro',
 ] as const;

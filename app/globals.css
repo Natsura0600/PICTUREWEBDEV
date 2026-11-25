@@ -675,13 +675,6 @@
     transform 0.6s cubic-bezier(0.65, 0, 0.35, 1),
     width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
 }
-.hs-links {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: calc(22 * var(--n));
-  font-size: calc(21 * var(--n));
-}
 .hs-cta {
   position: absolute;
   left: 50%;
@@ -745,10 +738,6 @@
   }
   .hs-title {
     font-size: 14px;
-  }
-  .hs-links {
-    font-size: 15px;
-    gap: 10px;
   }
   .hs-tabs {
     top: 52px;

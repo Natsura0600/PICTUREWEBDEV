@@ -505,9 +505,6 @@ export function ProjectsSlider({ slides }: { slides: ProjectSlide[] }) {
             ))}
             <span ref={bar} className="hs-bar" aria-hidden="true" />
           </div>
-          <div className="hs-links" data-rise="410">
-            <Link href="/proyectos">Ver todos</Link>
-          </div>
         </div>
 
         <button

@@ -10,7 +10,7 @@ import { breadcrumbJsonLd, faqJsonLd, pageMetadata } from '@/lib/seo';
 export const metadata = pageMetadata({
   title: 'Servicios',
   description:
-    'Sitios web, sistemas de turnos y pedidos, paneles a medida y mantenimiento. Pedí tu presupuesto sin compromiso.',
+    'Sitios web, sistemas de turnos y pedidos, agente de IA para WhatsApp, manejo de Instagram y mantenimiento. Pedí tu presupuesto sin compromiso.',
   path: '/servicios',
 });
 
