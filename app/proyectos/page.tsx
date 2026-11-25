@@ -1,5 +1,4 @@
 import { ProjectCard } from '@/components/project/ProjectCard';
-import { ContactCTA } from '@/components/sections/ContactCTA';
 import { SectionHeading } from '@/components/sections/SectionHeading';
 import { getProjects } from '@/lib/projects';
 import { pageMetadata } from '@/lib/seo';
@@ -32,7 +31,6 @@ export default async function ProjectsPage() {
           ))}
         </div>
       </section>
-      <ContactCTA />
     </>
   );
 }

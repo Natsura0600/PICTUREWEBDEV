@@ -1,9 +1,7 @@
 import { SectionIndex } from '@/components/layout/SectionIndex';
 import { About } from '@/components/sections/About';
-import { ContactCTA } from '@/components/sections/ContactCTA';
 import { Faq } from '@/components/sections/Faq';
 import { Hero } from '@/components/sections/Hero';
-import { Process } from '@/components/sections/Process';
 import { ProjectsSlider, type ProjectSlide } from '@/components/sections/ProjectsSlider';
 import { Solutions } from '@/components/sections/Solutions';
 import { Testimonials } from '@/components/sections/Testimonials';
@@ -34,8 +32,8 @@ function toSlide(p: Project): ProjectSlide | null {
 
 /**
  * Inicio, pensado para vender en pocos pasos:
- * qué hacemos → qué necesita tu negocio (con su WhatsApp) → trabajos reales → cómo trabajamos →
- * quién está detrás → dudas → contacto.
+ * qué hacemos → qué necesita tu negocio (con su WhatsApp) → trabajos reales → quién está detrás → dudas.
+ * El contacto está en la portada, en cada solución y en el pie.
  */
 export default async function HomePage() {
   const projects = await getProjects();
@@ -46,20 +44,16 @@ export default async function HomePage() {
       <Hero projectCount={projects.length} />
       <Solutions />
       <ProjectsSlider slides={slides} />
-      <Process kicker="03 · Cómo trabajamos" />
-      <About kicker="04 · El estudio" />
+      <About kicker="03 · El estudio" />
       <Testimonials />
       <Faq />
-      <ContactCTA />
       <SectionIndex
         items={[
           { id: 'hero-title', label: 'Inicio' },
           { id: 'soluciones-title', label: 'Soluciones' },
           { id: 'proyectos-title', label: 'Proyectos' },
-          { id: 'proceso-title', label: 'Proceso' },
           { id: 'estudio-title', label: 'Estudio' },
           { id: 'faq-title', label: 'Preguntas' },
-          { id: 'cta-title', label: 'Contacto' },
         ]}
       />
       <JsonLd data={faqJsonLd()} />

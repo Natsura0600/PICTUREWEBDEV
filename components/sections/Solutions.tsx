@@ -29,7 +29,14 @@ function Instagram(props: ComponentProps<'svg'>) {
  * Segmentación para vender: cada tipo de cliente encuentra su camino, con lo que incluye,
  * un ejemplo real y un WhatsApp con el mensaje ya escrito para su caso.
  */
-export function Solutions() {
+export function Solutions({
+  kicker = '01 · Soluciones',
+  detailLink = true,
+}: {
+  kicker?: string;
+  /** En /servicios no hace falta el enlace "Ver detalle" (ya estás ahí). */
+  detailLink?: boolean;
+}) {
   return (
     <section
       id="soluciones"
@@ -39,7 +46,7 @@ export function Solutions() {
       <div className="wrap">
         <SectionHeading
           id="soluciones-title"
-          kicker="01 · Soluciones"
+          kicker={kicker}
           title={
             <>
               ¿Qué necesita <span className="hl">tu negocio?</span>
@@ -142,12 +149,14 @@ export function Solutions() {
               </li>
             ))}
           </ul>
-          <Link
-            href="/servicios"
-            className="text-fg font-bold whitespace-nowrap underline underline-offset-4 md:ml-auto"
-          >
-            Ver detalle
-          </Link>
+          {detailLink ? (
+            <Link
+              href="/servicios"
+              className="text-fg font-bold whitespace-nowrap underline underline-offset-4 md:ml-auto"
+            >
+              Ver detalle
+            </Link>
+          ) : null}
         </div>
       </div>
     </section>

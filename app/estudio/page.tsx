@@ -1,5 +1,4 @@
 import { About } from '@/components/sections/About';
-import { ContactCTA } from '@/components/sections/ContactCTA';
 import { Process } from '@/components/sections/Process';
 import { SectionHeading } from '@/components/sections/SectionHeading';
 import { Testimonials } from '@/components/sections/Testimonials';
@@ -33,7 +32,6 @@ export default function StudioPage() {
       </div>
       <Process kicker="Cómo trabajamos" />
       <Testimonials />
-      <ContactCTA />
     </>
   );
 }

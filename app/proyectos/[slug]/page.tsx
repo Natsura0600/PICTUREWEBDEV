@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { Reveal } from '@/components/motion/Reveal';
 import { Gallery } from '@/components/project/Gallery';
 import { ProjectShot, hostOf } from '@/components/project/ProjectShot';
-import { ContactCTA } from '@/components/sections/ContactCTA';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Button } from '@/components/ui/button';
 import { coverOf, getProject, getProjectSlugs, getProjects } from '@/lib/projects';
@@ -157,7 +156,6 @@ export default async function ProjectPage({ params }: Params) {
           </nav>
         ) : null}
       </article>
-      <ContactCTA />
       <JsonLd data={projectJsonLd(slug, meta)} />
       <JsonLd
         data={breadcrumbJsonLd([
